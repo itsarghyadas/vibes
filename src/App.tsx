@@ -117,6 +117,7 @@ export default function App() {
         <input
           type="number"
           value={speed}
+          step="0.01"
           onChange={(e) => setSpeed(Number(e.target.value))}
           placeholder="Speed"
           className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
@@ -158,7 +159,7 @@ export default function App() {
           onClick={resetAnimation}
           className="mt-4 px-4 py-2 bg-orange-500 text-white rounded"
         >
-          Reset
+          Reset Animation
         </button>
       </div>
       <SplitFlipAnimation
