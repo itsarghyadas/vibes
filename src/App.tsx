@@ -12,6 +12,7 @@ export default function App() {
   const initialEndStr = "I AM A ROBOT";
   const initialRows = 4;
   const initialColumns = 12;
+  const initialSpeed = 0.15;
   const initialWordPositions = [
     { word: initialBeginStr, row: 0, column: 0 },
     { word: "", row: 1, column: 2 },
@@ -23,6 +24,7 @@ export default function App() {
   const [endStr, setEndStr] = useState(initialEndStr);
   const [rows, setRows] = useState(initialRows);
   const [columns, setColumns] = useState(initialColumns);
+  const [speed, setSpeed] = useState(initialSpeed); // Add state for speed
   const [wordPositions, setWordPositions] =
     useState<WordPosition[]>(initialWordPositions);
   const [resetKey, setResetKey] = useState(0);
@@ -71,6 +73,7 @@ export default function App() {
     setEndStr(initialEndStr);
     setRows(initialRows);
     setColumns(initialColumns);
+    setSpeed(initialSpeed); // Reset speed
     setWordPositions(initialWordPositions);
     setResetKey((prevKey) => prevKey + 1); // Change the key to force re-mount
   };
@@ -110,6 +113,14 @@ export default function App() {
           placeholder="Columns"
           className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
         />
+        <label className="text-neutral-500/50">Speed</label>
+        <input
+          type="number"
+          value={speed}
+          onChange={(e) => setSpeed(Number(e.target.value))}
+          placeholder="Speed"
+          className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
+        />
         <label className="text-neutral-500/50">Word Positions</label>
         {wordPositions.map((pos, index) => (
           <div key={index} className="flex space-x-2">
@@ -145,12 +156,11 @@ export default function App() {
         ))}
         <button
           onClick={resetAnimation}
-          className="rounded mt-2 bg-orange-500 text-white px-4 py-2"
+          className="mt-4 px-4 py-2 bg-orange-500 text-white rounded"
         >
-          Reset Animation
+          Reset
         </button>
       </div>
-
       <SplitFlipAnimation
         key={resetKey}
         beginStr={beginStr}
@@ -158,6 +168,7 @@ export default function App() {
         rows={rows}
         columns={columns}
         wordPositions={wordPositions}
+        speed={speed}
       />
     </div>
   );
