@@ -34,7 +34,7 @@ export default function App() {
     const words = endStr.split(" ");
     return positions.map((pos, index) => ({
       word: words[index] || "",
-      row: pos.row,
+      row: index, // Set row to the index of the word
       column: pos.column,
     }));
   };
@@ -43,12 +43,12 @@ export default function App() {
     const words = endStr.split(" ");
     const newWordPositions = words.map((word, index) => ({
       word,
-      row: wordPositions[index]?.row ?? rows,
+      row: index, // Set row to the index of the word
       column: wordPositions[index]?.column ?? 0,
     }));
 
     for (let i = wordPositions.length; i < words.length; i++) {
-      newWordPositions[i] = { word: words[i], row: rows, column: 0 };
+      newWordPositions[i] = { word: words[i], row: i, column: 0 };
     }
 
     setWordPositions(newWordPositions);
