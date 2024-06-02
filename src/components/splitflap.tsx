@@ -177,7 +177,7 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
       x: number,
       a1: NodeListOf<HTMLElement>,
       a2: NodeListOf<HTMLElement>,
-      b1: NodeListOf<HTMLElement>,
+      _b1: NodeListOf<HTMLElement>,
       b2: NodeListOf<HTMLElement>,
       char: string[],
       strCount: number[],
