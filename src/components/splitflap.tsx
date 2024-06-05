@@ -1,19 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-type WordPosition = {
-  word: string;
-  row: number;
-  column: number;
-};
-
 type SplitFlipAnimationProps = {
   beginStr: string;
   endStr: string;
   speed?: number;
   rows: number;
   columns: number;
-  wordPositions: WordPosition[];
+  align?: "left" | "center" | "right";
+  verticalAlign?: "top" | "middle" | "bottom";
 };
 
 const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
@@ -22,7 +17,8 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
   speed = 0.17,
   rows,
   columns,
-  wordPositions,
+  align = "left",
+  verticalAlign = "top",
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -33,6 +29,43 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
       .padEnd(totalFlaps, " ")
       .split("");
     const endStrArray = Array(totalFlaps).fill(" ");
+
+    const calculateWordPositions = () => {
+      const positions: { word: string; row: number; column: number }[] = [];
+      const words = endStr.split(" ");
+      let startRow = 0;
+
+      switch (verticalAlign) {
+        case "middle":
+          startRow = Math.floor((rows - words.length) / 2);
+          break;
+        case "bottom":
+          startRow = rows - words.length;
+          break;
+        default:
+          startRow = 0;
+      }
+
+      words.forEach((word, index) => {
+        let col = 0;
+        switch (align) {
+          case "center":
+            col = Math.floor((columns - word.length) / 2);
+            break;
+          case "right":
+            col = columns - word.length;
+            break;
+          default:
+            col = 0;
+        }
+
+        positions.push({ word, row: startRow + index, column: col });
+      });
+
+      return positions;
+    };
+
+    const wordPositions = calculateWordPositions();
 
     wordPositions.forEach(({ word, row, column }) => {
       word.split("").forEach((char, index) => {
@@ -209,7 +242,36 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
     return () => {
       clearInterval(flipInterval);
     };
-  }, [beginStr, endStr, speed, rows, columns, wordPositions]);
+  }, [beginStr, endStr, speed, rows, columns, align, verticalAlign]);
+
+  const getAlignmentStyle = () => {
+    let justifyContent;
+    let alignItems;
+
+    switch (align) {
+      case "center":
+        justifyContent = "center";
+        break;
+      case "right":
+        justifyContent = "flex-end";
+        break;
+      default:
+        justifyContent = "flex-start";
+    }
+
+    switch (verticalAlign) {
+      case "middle":
+        alignItems = "center";
+        break;
+      case "bottom":
+        alignItems = "flex-end";
+        break;
+      default:
+        alignItems = "flex-start";
+    }
+
+    return { justifyContent, alignItems };
+  };
 
   return (
     <motion.div
@@ -239,6 +301,7 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
           gridTemplateRows: `repeat(${rows}, 1fr)`,
           gridTemplateColumns: `repeat(${columns}, 1fr)`,
           gap: "10px",
+          ...getAlignmentStyle(),
         }}
       ></div>
     </motion.div>
