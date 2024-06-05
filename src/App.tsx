@@ -24,7 +24,7 @@ export default function App() {
   const [endStr, setEndStr] = useState(initialEndStr);
   const [rows, setRows] = useState(initialRows);
   const [columns, setColumns] = useState(initialColumns);
-  const [speed, setSpeed] = useState(initialSpeed); // Add state for speed
+  const [speed, setSpeed] = useState(initialSpeed);
   const [wordPositions, setWordPositions] =
     useState<WordPosition[]>(initialWordPositions);
   const [resetKey, setResetKey] = useState(0);
@@ -36,7 +36,7 @@ export default function App() {
     const words = endStr.split(" ");
     return positions.map((pos, index) => ({
       word: words[index] || "",
-      row: index, // Set row to the index of the word
+      row: pos.row, // Use the manually set row value
       column: pos.column,
     }));
   };
@@ -45,7 +45,7 @@ export default function App() {
     const words = endStr.split(" ");
     const newWordPositions = words.map((word, index) => ({
       word,
-      row: index, // Set row to the index of the word
+      row: wordPositions[index]?.row ?? index, // Use existing row or default to index
       column: wordPositions[index]?.column ?? 0,
     }));
 
@@ -73,9 +73,9 @@ export default function App() {
     setEndStr(initialEndStr);
     setRows(initialRows);
     setColumns(initialColumns);
-    setSpeed(initialSpeed); // Reset speed
+    setSpeed(initialSpeed);
     setWordPositions(initialWordPositions);
-    setResetKey((prevKey) => prevKey + 1); // Change the key to force re-mount
+    setResetKey((prevKey) => prevKey + 1);
   };
 
   return (
