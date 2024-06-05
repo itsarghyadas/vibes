@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 
 type SplitFlipAnimationProps = {
   beginStr: string;
@@ -273,28 +272,17 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
     return { justifyContent, alignItems };
   };
 
+  useEffect(() => {
+    const div = divRef.current;
+    if (div) {
+      div.classList.add("show");
+    }
+  }, []);
+
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        translate: "0 4rem",
-        transform: "perspective(500px) rotateX(10deg)",
-      }}
-      animate={{
-        opacity: 1,
-        translate: 0,
-        transform: "perspective(500px) rotateX(0deg)",
-      }}
-      transition={{
-        duration: 1,
-        delay: 0.5,
-        ease: "easeInOut",
-        easings: "cubic-bezier(.8,0,.2,1)",
-      }}
-      className="shadow-[10px_10px_10px_10px_rgba(0,0,0,0.45)] bg-neutral-900/50 backdrop-blur border-[20px] border-neutral-950/80 p-5 rounded-lg flex flex-col items-center justify-center"
-    >
+    <div className="animated-div shadow-[10px_10px_10px_10px_rgba(0,0,0,0.45)] bg-neutral-900/50 backdrop-blur border-[20px] border-neutral-950/80 p-5 rounded-lg flex flex-col items-center justify-center">
       <div
-        className="center flex flex-wrap items-center justify-start"
+        className=" flex flex-wrap items-center justify-start"
         ref={divRef}
         style={{
           display: "grid",
@@ -304,7 +292,7 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
           ...getAlignmentStyle(),
         }}
       ></div>
-    </motion.div>
+    </div>
   );
 };
 
