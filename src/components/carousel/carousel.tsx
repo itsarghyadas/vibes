@@ -37,7 +37,7 @@ const testimonialData = [
     id: 6,
     text: "Top-notch service and friendly staff.",
     image:
-      "https://images.pexels.com/photos/20608440/pexels-photo-20608440/free-photo-of-horses-on-meadow-in-countryside.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+      "https://images.pexels.com/photos/15247550/pexels-photo-15247550/free-photo-of-standing-antelope-on-meadow.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
   },
 ];
 
@@ -92,7 +92,7 @@ export default function Carousel() {
                       alt="testimonial"
                       className="absolute top-0 left-0 w-full h-full rounded-lg"
                     />
-                    <div className="w-full h-full p-5 backdrop-blur-sm flex items-start justify-end border-2 border-neutral-200 rounded-lg flex-col">
+                    <div className="w-full h-full p-5 backdrop-blur-sm flex items-start justify-end border-2 border-neutral-200/10 rounded-lg flex-col">
                       <h2 className="text-xl text-balance font-bold mb-2 text-white">
                         {testimonial.text}
                       </h2>
