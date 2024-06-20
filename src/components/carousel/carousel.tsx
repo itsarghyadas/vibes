@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import "./carousel.css";
-import GlowContainer from "../glow-container";
 
 const testimonialData = [
   {
@@ -65,7 +64,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen flex overflow-hidden flex-col items-center justify-center">
       <div className="relative max-w-4xl overflow-hidden mask-container">
         <ul
           ref={carouselRef}
@@ -76,32 +75,30 @@ export default function Carousel() {
           }}
         >
           {testimonialData.map((testimonial, index) => (
-            <li key={testimonial.id}>
-              <article className="mx-4 ">
-                <GlowContainer>
-                  <div
-                    className={`relative card h-[200px] w-[300px] md:w-[350px] rounded-lg shadow-md flex-shrink-0 transition-all duration-300 ${
-                      currentIndex === index ? "active" : "inactive"
-                    }`}
-                    style={{
-                      scrollSnapAlign: "center",
-                    }}
-                  >
-                    <img
-                      src={testimonial.image}
-                      alt="testimonial"
-                      className="absolute top-0 left-0 w-full h-full rounded-lg"
-                    />
-                    <div className="w-full h-full p-5 backdrop-blur-sm flex items-start justify-end border-2 border-neutral-200/10 rounded-lg flex-col">
-                      <h2 className="text-xl text-balance font-bold mb-2 text-white">
-                        {testimonial.text}
-                      </h2>
-                      <p className="text-neutral-300 text-balance text-sm text-left">
-                        This is a description for card {testimonial.id}.
-                      </p>
-                    </div>
+            <li key={testimonial.id} className="mx-2">
+              <article className="mx-5 ring-4 rounded-md ring-neutral-200/20 glowcontainer relative before:absolute before:inset-3 before:-z-20 before:rounded-full before:bg-[#04e7d880]/50 before:blur-xl before:opacity-0 lg:before:inset-4 lg:before:blur-xl">
+                <div
+                  className={`relative card h-[200px] w-[300px] md:w-[350px] rounded-lg shadow-md flex-shrink-0 transition-all duration-300 ${
+                    currentIndex === index ? "active" : "inactive"
+                  }`}
+                  style={{
+                    scrollSnapAlign: "center",
+                  }}
+                >
+                  <img
+                    src={testimonial.image}
+                    alt="testimonial"
+                    className="absolute top-0 left-0 w-full h-full rounded-lg"
+                  />
+                  <div className="w-full h-full p-5 backdrop-blur-sm flex items-start justify-end border-2 border-neutral-200/10 rounded-lg flex-col">
+                    <h2 className="text-xl text-balance font-bold mb-2 text-white">
+                      {testimonial.text}
+                    </h2>
+                    <p className="text-neutral-300 text-balance text-sm text-left">
+                      This is a description for card {testimonial.id}.
+                    </p>
                   </div>
-                </GlowContainer>
+                </div>
               </article>
             </li>
           ))}

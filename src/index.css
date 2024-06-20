@@ -139,20 +139,4 @@
       background-color: #1a1a1a;
     }
   }
-  @keyframes rotateFade {
-    0% {
-      opacity: 1;
-      transform: rotate(0deg) translate3d(-50%, -50%, 0);
-    }
-    35% {
-      opacity: 1;
-    }
-    70% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-      transform: rotate(1turn) translate3d(-50%, -50%, 0);
-    }
-  }
 }

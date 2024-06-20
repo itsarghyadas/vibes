@@ -14,6 +14,14 @@ article {
   animation-timeline: view(inline);
 }
 
+[data-snap="true"] ul {
+  scroll-snap-type: x mandatory;
+}
+
+[data-snap="true"] li {
+  scroll-snap-align: center;
+}
+
 @keyframes highlight {
   entry 0%,
   exit 100% {
@@ -42,12 +50,21 @@ article {
   }
 }
 
-[data-snap="true"] ul {
-  scroll-snap-type: x mandatory;
-}
-
-[data-snap="true"] li {
-  scroll-snap-align: center;
+@keyframes rotateFade {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translate3d(-50%, -50%, 0);
+  }
+  35% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(1turn) translate3d(-50%, -50%, 0);
+  }
 }
 
 .mask-container {
