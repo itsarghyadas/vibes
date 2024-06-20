@@ -25,6 +25,23 @@ article {
   }
 }
 
+.glowcontainer::before {
+  animation: glowHighlight;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  animation-timeline: view(inline);
+}
+@keyframes glowHighlight {
+  entry 70%,
+  exit 80% {
+    opacity: 0;
+  }
+  entry 80%,
+  exit 0% {
+    opacity: 1;
+  }
+}
+
 [data-snap="true"] ul {
   scroll-snap-type: x mandatory;
 }
