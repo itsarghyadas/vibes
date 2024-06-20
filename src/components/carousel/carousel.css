@@ -1,0 +1,34 @@
+/* Add this to your global CSS file or in a <style> tag */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+article {
+  animation: highlight;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+  animation-timeline: view(inline);
+}
+
+@keyframes highlight {
+  entry 0%,
+  exit 100% {
+    scale: 0.8;
+  }
+  entry 100%,
+  exit 0% {
+    scale: 1.1;
+  }
+}
+
+[data-snap="true"] ul {
+  scroll-snap-type: x mandatory;
+}
+
+[data-snap="true"] li {
+  scroll-snap-align: center;
+}
