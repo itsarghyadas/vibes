@@ -72,7 +72,7 @@ export default function Carousel() {
             <li key={index}>
               <article>
                 <div
-                  className={`relative card h-[400px] w-[500px] rounded-xl shadow-md flex-shrink-0 mx-3.5 transition-all duration-300 ${
+                  className={`relative card h-[200px] w-[350px] rounded-xl shadow-md flex-shrink-0 mx-3.5 transition-all duration-300 ${
                     currentIndex === index ? "active" : "inactive"
                   }`}
                   style={{
@@ -84,11 +84,11 @@ export default function Carousel() {
                     alt="testimonial"
                     className="absolute top-0 left-0 w-full h-full -z-10 rounded-xl"
                   />
-                  <div className="w-full h-full backdrop-blur-sm flex items-center justify-center border-2 border-neutral-200 rounded-xl flex-col">
-                    <h2 className="text-xl font-bold mb-2 text-white">
+                  <div className="w-full h-full p-5 backdrop-blur-sm flex items-start justify-end border-2 border-neutral-200 rounded-xl flex-col">
+                    <h2 className="text-xl text-balance font-bold mb-2 text-white">
                       {testimonial.text}
                     </h2>
-                    <p className="text-neutral-300">
+                    <p className="text-neutral-300 text-balance text-sm text-left">
                       This is a description for card {index + 1}.
                     </p>
                   </div>
