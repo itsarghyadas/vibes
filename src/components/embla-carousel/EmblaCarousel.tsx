@@ -171,7 +171,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
         <div className="embla__container flex">
           {slides.map((slide, index) => (
             <div
-              className="embla__slide [flex:0_0_35rem] [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex"
+              className="embla__slide [flex:0_0_30rem] [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex"
               key={index}
             >
               <div

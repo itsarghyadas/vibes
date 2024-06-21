@@ -49,3 +49,24 @@
     opacity: 1;
   }
 }
+
+@keyframes rotateFade {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translate3d(-50%, -50%, 0);
+  }
+  35% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(1turn) translate3d(-50%, -50%, 0);
+  }
+}
+
+.animated-element {
+  animation: rotateFade 5s infinite;
+}
