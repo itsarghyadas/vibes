@@ -59,11 +59,11 @@ const EmblaCarouselShow: React.FC = () => {
       <img
         src={testimonial.image}
         alt="testimonial"
-        className="absolute w-full h-full rounded-lg"
+        className="absolute w-full h-full top-0 left-0 rounded-lg"
       />
-      <div className="w-full h-full p-5 backdrop-blur-sm flex flex-col md:flex-row items-end justify-end md:justify-between border-2 border-neutral-200/10 rounded-lg">
+      <div className="w-full h-full p-5 backdrop-blur-sm flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 rounded-lg">
         <div className="flex flex-col w-full">
-          <h2 className="text-xl text-balance font-bold mb-2 text-white text-center md:text-left">
+          <h2 className="text-xl text-balance max-w-[15rem] mx-0 font-bold mb-2 text-white text-center md:text-left">
             {testimonial.text}
           </h2>
           <p className="text-neutral-300 text-balance text-sm text-center md:text-left">
