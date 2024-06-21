@@ -32,3 +32,20 @@
 .embla__slide__number {
   backface-visibility: hidden;
 }
+
+.glowcontainer::before {
+  animation: glowHighlight;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+  animation-timeline: view(inline);
+}
+@keyframes glowHighlight {
+  entry 50%,
+  exit 70% {
+    opacity: 0;
+  }
+  entry 50%,
+  exit 50% {
+    opacity: 1;
+  }
+}
