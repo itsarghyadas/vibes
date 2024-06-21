@@ -68,7 +68,7 @@ export default function SplitFlapShow({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen h-full space-y-4 pb-20">
+    <div className="splitflip-body flex flex-col items-center justify-center min-h-screen h-full space-y-4 pb-20">
       <div className="gap-y-2 my-10 max-w-4xl mx-auto flex flex-wrap items-center gap-x-10 border rounded-lg border-neutral-500 p-5 font-space">
         <div className="flex flex-col gap-y-1">
           <label className="text-neutral-500/50">Begin String</label>

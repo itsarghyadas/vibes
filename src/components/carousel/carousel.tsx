@@ -64,7 +64,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="min-h-screen flex overflow-hidden flex-col items-center justify-center">
+    <div className="min-h-screen bg-neutral-900 flex overflow-hidden flex-col items-center justify-center">
       <div className="relative max-w-4xl overflow-hidden mask-container">
         <ul
           ref={carouselRef}
