@@ -11,6 +11,7 @@ import {
   EmblaOptionsType,
 } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
+import GlowContainer from "../glowcontainer";
 
 // Custom hook for dot button functionality from embla
 type UseDotButtonType = {
@@ -165,9 +166,9 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
   }, [emblaApi, setTweenFactor, setTweenNodes, tweenScale]);
 
   return (
-    <div className="embla">
-      <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-        <div className="embla__container flex ">
+    <div className="embla my-20">
+      <div className="embla__viewport py-20" ref={emblaRef}>
+        <div className="embla__container flex">
           {slides.map((slide, index) => (
             <div
               className="embla__slide [flex:0_0_35%] min-w-0 [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex"
@@ -178,7 +179,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
                   className || ""
                 }`}
               >
-                {slide}
+                <GlowContainer className="h-full">{slide}</GlowContainer>
               </div>
             </div>
           ))}
