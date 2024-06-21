@@ -1,42 +1,102 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  PropsWithChildren,
+} from "react";
 import {
   EmblaCarouselType,
   EmblaEventType,
   EmblaOptionsType,
 } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import {
-  NextButton,
-  PrevButton,
-  usePrevNextButtons,
-} from "./EmblaCarouselArrowButton";
-import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 
-const TWEEN_FACTOR_BASE = 0.52;
+// Custom hook for dot button functionality from embla
+type UseDotButtonType = {
+  selectedIndex: number;
+  scrollSnaps: number[];
+  onDotButtonClick: (index: number) => void;
+};
+
+const useDotButton = (
+  emblaApi: EmblaCarouselType | undefined,
+  onButtonClick?: (emblaApi: EmblaCarouselType) => void
+): UseDotButtonType => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const onDotButtonClick = useCallback(
+    (index: number) => {
+      if (!emblaApi) return;
+      emblaApi.scrollTo(index);
+      if (onButtonClick) onButtonClick(emblaApi);
+    },
+    [emblaApi, onButtonClick]
+  );
+
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+    setScrollSnaps(emblaApi.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onInit(emblaApi);
+    onSelect(emblaApi);
+
+    emblaApi.on("reInit", onInit).on("reInit", onSelect).on("select", onSelect);
+  }, [emblaApi, onInit, onSelect]);
+
+  return {
+    selectedIndex,
+    scrollSnaps,
+    onDotButtonClick,
+  };
+};
+
+// DotButton component
+type DotButtonPropType = PropsWithChildren<
+  React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >
+>;
+
+const DotButton: React.FC<DotButtonPropType> = (props) => {
+  const { children, ...restProps } = props;
+
+  return (
+    <button type="button" {...restProps}>
+      {children}
+    </button>
+  );
+};
+
+const TWEEN_FACTOR_BASE = 0.25;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
 
-type PropType = {
-  slides: number[];
+// Main EmblaCarousel component
+type EmblaCarouselPropType = {
+  className?: string;
+  slides: React.ReactNode[];
   options?: EmblaOptionsType;
 };
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
+  const { slides, options, className } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<HTMLElement[]>([]);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
-
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick,
-  } = usePrevNextButtons(emblaApi);
 
   const setTweenNodes = useCallback((emblaApi: EmblaCarouselType): void => {
     tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
@@ -106,23 +166,27 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   return (
     <div className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {slides.map((index) => (
-            <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">{index + 1}</div>
+      <div className="embla__viewport overflow-hidden" ref={emblaRef}>
+        <div className="embla__container flex ">
+          {slides.map((slide, index) => (
+            <div
+              className="embla__slide [flex:0_0_35%] min-w-0 [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex"
+              key={index}
+            >
+              <div
+                className={`embla__slide__number [backface-visibility:hidden] flex items-center justify-center h-full ${
+                  className || ""
+                }`}
+              >
+                {slide}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="embla__controls">
-        <div className="embla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
-
-        <div className="embla__dots">
+      <div className="flex items-center justify-center mt-5">
+        <div className="flex items-center justify-center gap-2">
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}

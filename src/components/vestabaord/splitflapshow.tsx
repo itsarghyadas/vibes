@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SplitFlipAnimation from "./splitflap";
+import Vestabaord from "./vestaboard";
 
 type WordPosition = {
   word: string;
@@ -156,15 +157,26 @@ export default function SplitFlapShow({
           Reset Animation
         </button>
       </div>
-      <SplitFlipAnimation
-        key={resetKey}
+      <div className="">
+        <SplitFlipAnimation
+          key={resetKey}
+          beginStr={beginStr}
+          endStr={endStr}
+          rows={rows}
+          columns={columns}
+          align={align}
+          verticalAlign={verticalAlign}
+          speed={speed}
+        />
+      </div>
+      <Vestabaord
         beginStr={beginStr}
         endStr={endStr}
+        speed={speed}
         rows={rows}
         columns={columns}
         align={align}
         verticalAlign={verticalAlign}
-        speed={speed}
       />
     </div>
   );
