@@ -58,14 +58,8 @@ const EmblaCarouselShow: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            console.log(
-              `Intersection started for element with text: ${entry.target.textContent}`
-            );
             entry.target.classList.add("animate-text");
           } else {
-            console.log(
-              `Intersection finished for element with text: ${entry.target.textContent}`
-            );
             entry.target.classList.remove("animate-text");
           }
         });
@@ -94,23 +88,25 @@ const EmblaCarouselShow: React.FC = () => {
       <img
         src={testimonial.image}
         alt="testimonial"
-        className="absolute w-full h-full top-0 left-0 rounded-lg"
+        className="absolute w-full h-full inset-0 rounded-lg"
       />
-      <div
-        className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 rounded-lg backdrop-blur-sm"
-        ref={(el) => (textRefs.current[index] = el)}
-      >
-        <div className="flex flex-col gap-y-0.5 w-full">
-          <h2 className="text-base text-balance font-bold leading-6 text-white text-center md:text-left">
-            {testimonial.text}
-          </h2>
-          <p className="text-white/50 text-balance text-sm text-center md:text-left">
-            This is a description for card {testimonial.id}.
-          </p>
+      <div className="backdrop-blur-sm w-full h-full">
+        <div
+          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 text-content rounded-lg "
+          ref={(el) => (textRefs.current[index] = el)}
+        >
+          <div className=" flex flex-col gap-y-0.5 w-full">
+            <h2 className="text-base text-balance font-bold leading-6 text-white text-center md:text-left">
+              {testimonial.text}
+            </h2>
+            <p className="text-white/50 text-balance text-sm text-center md:text-left">
+              This is a description for card {testimonial.id}.
+            </p>
+          </div>
+          <button className="text-white border shrink-0 w-full md:w-fit px-4 py-2 rounded-full mt-4 hover:bg-white hover:text-neutral-900 transition-colors">
+            Read more
+          </button>
         </div>
-        <button className="text-white border shrink-0 w-full md:w-fit px-4 py-2 rounded-full mt-4 hover:bg-white hover:text-neutral-900 transition-colors">
-          Read more
-        </button>
       </div>
     </div>
   ));

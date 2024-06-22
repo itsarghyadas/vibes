@@ -77,8 +77,8 @@ const DotButton: React.FC<DotButtonPropType> = (props) => {
   );
 };
 
-const TWEEN_SCALE_FACTOR_BASE = 0.2;
-const TWEEN_OPACITY_FACTOR_BASE = 0.75;
+const TWEEN_SCALE_FACTOR_BASE = 0.12;
+const TWEEN_OPACITY_FACTOR_BASE = 0.05;
 const TWEEN_GLOW_OPACITY_FACTOR_BASE = 0.55;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
@@ -215,6 +215,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
       const scrollProgress = emblaApi.scrollProgress();
       const slidesInView = emblaApi.slidesInView();
       const isScrollEvent = eventName === "scroll";
+      const threshold = 0.1; // Adjust this value to control the threshold
 
       emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
         let diffToTarget = scrollSnap - scrollProgress;
@@ -240,9 +241,12 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
             });
           }
 
-          const tweenValue =
-            1 - Math.abs(diffToTarget * tweenGlowOpacityFactor.current);
-          const glowOpacity = numberWithinRange(tweenValue, 0, 1).toString();
+          const distance = Math.abs(diffToTarget);
+          const glowOpacity = numberWithinRange(
+            1 - distance / threshold,
+            0,
+            1
+          ).toString();
           emblaApi
             .slideNodes()
             // eslint-disable-next-line no-unexpected-multiline
@@ -298,7 +302,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
               key={index}
             >
               <div
-                className={`embla__slide__number w-full [backface-visibility:hidden] flex items-center justify-center h-full relative before:absolute before:inset-3 before:-z-20 before:rounded-full before:bg-purple-500/50 before:blur-2xl lg:before:inset-4 lg:before:blur-3xl before:transition-all before:duration-50 before:ease-in-out before:opacity-[--glow-opacity] ${
+                className={`embla__slide__number w-full [backface-visibility:hidden] flex items-center justify-center h-full relative before:absolute before:inset-3 before:-z-20 before:rounded-full before:bg-purple-500/50 before:blur-2xl lg:before:inset-4 lg:before:blur-3xl before:transition-opacity before:opacity-[--glow-opacity] ${
                   className || ""
                 }`}
               >

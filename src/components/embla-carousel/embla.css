@@ -47,7 +47,17 @@
 }
 
 .animate-text {
-  opacity: 0;
-  transform: translateY(20px);
   animation: animateText 0.5s ease-out forwards;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Add this CSS to your embla.css file */
+.is-selected .text-content {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.text-content {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
