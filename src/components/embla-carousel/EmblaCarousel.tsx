@@ -307,9 +307,9 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
                 }`}
               >
                 <div className="h-full w-full">
-                  <div className="group relative z-0 h-full w-full overflow-hidden rounded-xl p-[1px] ring-1 ring-purple-300/15">
-                    <div className="rounded-xl bg-purple-900/10 p-2 w-full h-full">
-                      <div className="overflow-hidden rounded-xl h-full w-full">
+                  <div className="group relative z-0 h-full w-full overflow-hidden rounded-[32px] p-[1px] ring-1 ring-[#F59DD3]/30 bg-gradient-to-b from-[#EA3BA7]/25 to-[#07090D]/50">
+                    <div className="bg-purple-900/10 p-2 w-full h-full">
+                      <div className="overflow-hidden rounded-3xl h-full w-full">
                         {slide}
                       </div>
                     </div>

@@ -83,16 +83,16 @@ const EmblaCarouselShow: React.FC = () => {
   const slides = testimonialData.map((testimonial, index) => (
     <div
       key={testimonial.id}
-      className="w-full h-full flex relative rounded-lg"
+      className="w-full h-full flex relative "
     >
       <img
         src={testimonial.image}
         alt="testimonial"
-        className="absolute w-full h-full inset-0 rounded-lg"
+        className="absolute w-full h-full inset-0 "
       />
       <div className="gradient-overlay w-full h-full">
         <div
-          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 text-content rounded-lg "
+          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 text-content "
           ref={(el) => (textRefs.current[index] = el)}
         >
           <div className=" flex flex-col gap-y-0.5 w-full">
@@ -117,7 +117,7 @@ const EmblaCarouselShow: React.FC = () => {
         <EmblaCarousel
           slides={slides}
           options={OPTIONS}
-          className="rounded-lg w-full min-h-[25rem] h-full"
+          className=" w-full min-h-[25rem] h-full"
         />
       </div>
     </section>
