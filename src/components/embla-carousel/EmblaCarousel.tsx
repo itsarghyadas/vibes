@@ -215,7 +215,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
       const scrollProgress = emblaApi.scrollProgress();
       const slidesInView = emblaApi.slidesInView();
       const isScrollEvent = eventName === "scroll";
-      const threshold = 0.15;
+      const threshold = 0.1; // More aggressive threshold for sharper transition
 
       emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
         let diffToTarget = scrollSnap - scrollProgress;
@@ -244,7 +244,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
           const distance = Math.abs(diffToTarget);
           const glowOpacity = numberWithinRange(
             1 - distance / threshold,
-            0,
+            0.0001, // Ensure minimum opacity is very low
             1
           ).toString();
           emblaApi
@@ -266,6 +266,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
     setTweenGlowOpacityFactor(emblaApi);
     tweenScale(emblaApi);
     tweenOpacity(emblaApi);
+    tweenGlowOpacity(emblaApi);
 
     emblaApi
       .on("reInit", setTweenNodes)
@@ -298,7 +299,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
         <div className="embla__container flex">
           {slides.map((slide, index) => (
             <div
-              className="embla__slide max-[350px]:[flex:0_0_18rem] [flex:0_0_20rem] md:[flex:0_0_45rem] [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex  relative before:absolute before:inset-3 before:-z-20 before:rounded-full before:bg-[#EA3BA7]/50 before:blur-3xl lg:before:inset-5 lg:before:top-10 lg:before:blur-3xl before:transition-opacity before:opacity-[--glow-opacity] "
+              className="embla__slide max-[350px]:[flex:0_0_18rem] [flex:0_0_20rem] md:[flex:0_0_45rem] [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex  relative before:absolute before:inset-3 before:-z-20 before:rounded-full before:bg-[#EA3BA7]/50 before:blur-3xl lg:before:inset-4 lg:before:blur-3xl before:transition-opacity before:opacity-[--glow-opacity] "
               key={index}
             >
               <div
