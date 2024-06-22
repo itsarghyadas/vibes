@@ -79,7 +79,7 @@ const DotButton: React.FC<DotButtonPropType> = (props) => {
 
 const TWEEN_SCALE_FACTOR_BASE = 0.12;
 const TWEEN_OPACITY_FACTOR_BASE = 0.75;
-const TWEEN_GLOW_OPACITY_FACTOR_BASE = 0.55;
+const TWEEN_GLOW_OPACITY_FACTOR_BASE = 0.5;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
