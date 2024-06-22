@@ -293,12 +293,12 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
   ]);
 
   return (
-    <div className="embla my-20 font-spline">
-      <div className="embla__viewport py-20" ref={emblaRef}>
+    <div className="embla font-spline">
+      <div className="embla__viewport py-10" ref={emblaRef}>
         <div className="embla__container flex">
           {slides.map((slide, index) => (
             <div
-              className="embla__slide max-[350px]:[flex:0_0_18rem] [flex:0_0_20rem] md:[flex:0_0_45rem] [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex  relative before:absolute before:inset-3 before:-z-20 before:rounded-full before:bg-purple-500/50 before:blur-3xl lg:before:inset-4 lg:before:blur-3xl before:transition-opacity before:opacity-[--glow-opacity] "
+              className="embla__slide max-[350px]:[flex:0_0_18rem] [flex:0_0_20rem] md:[flex:0_0_45rem] [touch-action:pan-y_pinch-zoom] [backface-visibility:hidden] flex  relative before:absolute before:inset-3 before:-z-20 before:rounded-full before:bg-[#EA3BA7]/50 before:blur-3xl lg:before:inset-5 lg:before:top-10 lg:before:blur-3xl before:transition-opacity before:opacity-[--glow-opacity] "
               key={index}
             >
               <div
