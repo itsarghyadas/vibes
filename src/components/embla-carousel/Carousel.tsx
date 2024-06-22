@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import EmblaCarousel from "../embla-carousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import "./embla.css";
@@ -51,7 +51,42 @@ const testimonialData = [
 const OPTIONS: EmblaOptionsType = { loop: true, align: "center" };
 
 const EmblaCarouselShow: React.FC = () => {
-  const slides = testimonialData.map((testimonial) => (
+  const textRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            console.log(
+              `Intersection started for element with text: ${entry.target.textContent}`
+            );
+            entry.target.classList.add("animate-text");
+          } else {
+            console.log(
+              `Intersection finished for element with text: ${entry.target.textContent}`
+            );
+            entry.target.classList.remove("animate-text");
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const currentRefs = textRefs.current; // Copy refs to a variable
+
+    currentRefs.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      currentRefs.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
+
+  const slides = testimonialData.map((testimonial, index) => (
     <div
       key={testimonial.id}
       className="w-full h-full flex relative rounded-lg"
@@ -61,16 +96,19 @@ const EmblaCarouselShow: React.FC = () => {
         alt="testimonial"
         className="absolute w-full h-full top-0 left-0 rounded-lg"
       />
-      <div className="w-full h-full p-5 backdrop-blur-sm flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 rounded-lg">
-        <div className="flex flex-col w-full">
-          <h2 className="text-xl text-balance max-w-[15rem] mx-0 font-bold mb-2 text-white text-center md:text-left">
+      <div
+        className="w-full h-full p-5 backdrop-blur-sm flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 rounded-lg"
+        ref={(el) => (textRefs.current[index] = el)}
+      >
+        <div className="flex flex-col gap-y-0.5 w-full">
+          <h2 className="text-base text-balance font-bold leading-6 text-white text-center md:text-left">
             {testimonial.text}
           </h2>
-          <p className="text-neutral-300 text-balance text-sm text-center md:text-left">
+          <p className="text-white/50 text-balance text-sm text-center md:text-left">
             This is a description for card {testimonial.id}.
           </p>
         </div>
-        <button className="text-white border shrink-0 w-full md:w-fit px-4 py-2 rounded-full mt-4 hover:bg-white hover:text-neutral-9000 transition-colors">
+        <button className="text-white border shrink-0 w-full md:w-fit px-4 py-2 rounded-full mt-4 hover:bg-white hover:text-neutral-900 transition-colors">
           Read more
         </button>
       </div>
@@ -79,11 +117,11 @@ const EmblaCarouselShow: React.FC = () => {
 
   return (
     <section className="bg-neutral-900">
-      <div className="max-w-5xl [-webkit-mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] mx-auto min-h-screen overflow-hidden p-5 flex items-center justify-center w-full">
+      <div className="max-w-7xl [-webkit-mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] mx-auto min-h-screen overflow-hidden p-5 flex items-center justify-center w-full">
         <EmblaCarousel
           slides={slides}
           options={OPTIONS}
-          className="rounded-lg w-full min-h-[20rem] h-full"
+          className="rounded-lg w-full min-h-[25rem] h-full"
         />
       </div>
     </section>
