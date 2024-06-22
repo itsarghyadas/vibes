@@ -78,7 +78,7 @@ const DotButton: React.FC<DotButtonPropType> = (props) => {
 };
 
 const TWEEN_SCALE_FACTOR_BASE = 0.12;
-const TWEEN_OPACITY_FACTOR_BASE = 0.05;
+const TWEEN_OPACITY_FACTOR_BASE = 0.75;
 const TWEEN_GLOW_OPACITY_FACTOR_BASE = 0.55;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
@@ -215,7 +215,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
       const scrollProgress = emblaApi.scrollProgress();
       const slidesInView = emblaApi.slidesInView();
       const isScrollEvent = eventName === "scroll";
-      const threshold = 0.1; // Adjust this value to control the threshold
+      const threshold = 0.15;
 
       emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
         let diffToTarget = scrollSnap - scrollProgress;
