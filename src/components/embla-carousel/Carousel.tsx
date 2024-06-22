@@ -64,7 +64,7 @@ const EmblaCarouselShow: React.FC = () => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.85 }
     );
 
     const currentRefs = textRefs.current; // Copy refs to a variable
