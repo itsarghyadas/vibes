@@ -3,7 +3,7 @@ import EmblaCarousel from "../embla-carousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import "./embla.css";
 
-const testimonialData = [
+const CarouselSlidesData = [
   {
     id: 1,
     text: "This is the best service I have ever used!",
@@ -67,7 +67,7 @@ const EmblaCarouselShow: React.FC = () => {
       { threshold: 0.85 }
     );
 
-    const currentRefs = textRefs.current; // Copy refs to a variable
+    const currentRefs = textRefs.current;
 
     currentRefs.forEach((ref) => {
       if (ref) observer.observe(ref);
@@ -80,8 +80,8 @@ const EmblaCarouselShow: React.FC = () => {
     };
   }, []);
 
-  const slides = testimonialData.map((testimonial, index) => (
-    <div key={testimonial.id} className="w-full h-full flex relative ">
+  const slides = CarouselSlidesData.map((testimonial, index) => (
+    <div key={testimonial.id} className="w-full h-full flex relative">
       <img
         src={testimonial.image}
         alt="testimonial"
@@ -89,10 +89,10 @@ const EmblaCarouselShow: React.FC = () => {
       />
       <div className="gradient-overlay w-full h-full">
         <div
-          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-start md:items-end justify-end md:justify-between text-content "
+          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-start md:items-end justify-end md:justify-between text-content"
           ref={(el) => (textRefs.current[index] = el)}
         >
-          <div className=" flex flex-col gap-y-1.5 md:gap-y-0.5 w-full">
+          <div className="flex flex-col gap-y-1.5 md:gap-y-0.5 w-full">
             <h2 className="text-base text-balance font-medium leading-6 text-white text-left">
               {testimonial.text}
             </h2>
@@ -114,7 +114,7 @@ const EmblaCarouselShow: React.FC = () => {
         <EmblaCarousel
           slides={slides}
           options={OPTIONS}
-          className=" w-full min-h-[25rem] h-full"
+          className="w-full min-h-[25rem] h-full"
         />
       </div>
     </section>

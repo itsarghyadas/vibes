@@ -11,7 +11,7 @@
   padding: 0;
   margin: 0;
   width: 1.5rem;
-  height: 0.15rem;
+  height: 1rem;
   display: flex;
 
   align-items: center;
@@ -19,7 +19,7 @@
   border-radius: 2%;
 }
 .embla__dot:after {
-  background-color: #ffffff25;
+  border-top: 2px solid #ffffff25;
   width: 100%;
   height: 100%;
   border-radius: 2%;
@@ -28,7 +28,7 @@
   content: "";
 }
 .embla__dot--selected:after {
-  background-color: #ea3ba7;
+  border-top: 2px solid #ea3ba7;
   transition: all 0.3s ease-in-out;
 }
 .embla__slide__number {

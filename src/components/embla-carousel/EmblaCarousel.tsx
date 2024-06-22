@@ -12,7 +12,16 @@ import {
 } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 
-// Custom hook for dot button functionality from embla
+// Utility function to constrain a number within a range
+const numberWithinRange = (number: number, min: number, max: number): number =>
+  Math.min(Math.max(number, min), max);
+
+// Constants for tween factors
+const TWEEN_SCALE_FACTOR_BASE = 0.12;
+const TWEEN_OPACITY_FACTOR_BASE = 0.75;
+const TWEEN_GLOW_OPACITY_FACTOR_BASE = 0.5;
+
+// Custom hook for dot button functionality
 type UseDotButtonType = {
   selectedIndex: number;
   scrollSnaps: number[];
@@ -77,13 +86,6 @@ const DotButton: React.FC<DotButtonPropType> = (props) => {
   );
 };
 
-const TWEEN_SCALE_FACTOR_BASE = 0.12;
-const TWEEN_OPACITY_FACTOR_BASE = 0.75;
-const TWEEN_GLOW_OPACITY_FACTOR_BASE = 0.5;
-
-const numberWithinRange = (number: number, min: number, max: number): number =>
-  Math.min(Math.max(number, min), max);
-
 // Main EmblaCarousel component
 type EmblaCarouselPropType = {
   className?: string;
@@ -102,6 +104,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
 
+  // Setters for tween factors and nodes
   const setTweenNodes = useCallback((emblaApi: EmblaCarouselType): void => {
     tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
       return slideNode.querySelector(".embla__slide__number") as HTMLElement;
@@ -126,6 +129,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
     []
   );
 
+  // Tween functions
   const tweenScale = useCallback(
     (emblaApi: EmblaCarouselType, eventName?: EmblaEventType) => {
       const engine = emblaApi.internalEngine();
@@ -244,7 +248,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
           const distance = Math.abs(diffToTarget);
           const glowOpacity = numberWithinRange(
             1 - distance / threshold,
-            0.0001, // Ensure minimum opacity is very low
+            0,
             1
           ).toString();
           emblaApi
@@ -257,6 +261,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
     []
   );
 
+  // Effect to initialize and set up event listeners
   useEffect(() => {
     if (!emblaApi) return;
 
