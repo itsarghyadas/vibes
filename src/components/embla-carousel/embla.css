@@ -73,6 +73,6 @@
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   border-radius: inherit;
 }

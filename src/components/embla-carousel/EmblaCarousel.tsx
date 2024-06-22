@@ -293,7 +293,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
   ]);
 
   return (
-    <div className="embla my-20">
+    <div className="embla my-20 font-spline">
       <div className="embla__viewport py-20" ref={emblaRef}>
         <div className="embla__container flex">
           {slides.map((slide, index) => (

@@ -81,14 +81,11 @@ const EmblaCarouselShow: React.FC = () => {
   }, []);
 
   const slides = testimonialData.map((testimonial, index) => (
-    <div
-      key={testimonial.id}
-      className="w-full h-full flex relative "
-    >
+    <div key={testimonial.id} className="w-full h-full flex relative ">
       <img
         src={testimonial.image}
         alt="testimonial"
-        className="absolute w-full h-full inset-0 "
+        className="absolute w-full h-full inset-0 object-cover aspect-square"
       />
       <div className="gradient-overlay w-full h-full">
         <div
@@ -96,10 +93,10 @@ const EmblaCarouselShow: React.FC = () => {
           ref={(el) => (textRefs.current[index] = el)}
         >
           <div className=" flex flex-col gap-y-0.5 w-full">
-            <h2 className="text-base text-balance font-bold leading-6 text-white text-center md:text-left">
+            <h2 className="text-base text-balance font-medium leading-6 text-white text-center md:text-left">
               {testimonial.text}
             </h2>
-            <p className="text-white/50 text-balance text-sm text-center md:text-left">
+            <p className="text-white/60 text-balance text-sm font-normal text-center md:text-left">
               This is a description for card {testimonial.id}.
             </p>
           </div>
