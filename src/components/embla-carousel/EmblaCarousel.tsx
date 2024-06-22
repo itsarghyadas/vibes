@@ -333,8 +333,10 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
             <DotButton
               key={index}
               onClick={() => onDotButtonClick(index)}
-              className={"embla__dot".concat(
-                index === selectedIndex ? " embla__dot--selected" : ""
+              className={"embla__dot bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0 w-[1.5rem] h-[1rem] items-center justify-center rounded-md [-webkit-tap-highlight-color:rgba(255,255,255,0)] [-webkit-appearance:none] after:border-t-2 after:border-[#ffffff25] after:w-full after:h-full after:flex after:items-center after:justify-center after:content-['']".concat(
+                index === selectedIndex
+                  ? " embla__dot--selected after:border-t-[#ea3ba7] after:transition-all"
+                  : ""
               )}
             />
           ))}
