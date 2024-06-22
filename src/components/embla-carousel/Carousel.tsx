@@ -89,7 +89,7 @@ const EmblaCarouselShow: React.FC = () => {
       />
       <div className="gradient-overlay w-full h-full">
         <div
-          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between border-2 border-neutral-200/10 text-content "
+          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between text-content "
           ref={(el) => (textRefs.current[index] = el)}
         >
           <div className=" flex flex-col gap-y-0.5 w-full">
