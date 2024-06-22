@@ -89,18 +89,18 @@ const EmblaCarouselShow: React.FC = () => {
       />
       <div className="gradient-overlay w-full h-full">
         <div
-          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-end justify-end md:justify-between text-content "
+          className="w-full h-full p-5 flex flex-col md:flex-row gap-x-10 items-start md:items-end justify-end md:justify-between text-content "
           ref={(el) => (textRefs.current[index] = el)}
         >
-          <div className=" flex flex-col gap-y-0.5 w-full">
-            <h2 className="text-base text-balance font-medium leading-6 text-white text-center md:text-left">
+          <div className=" flex flex-col gap-y-1.5 md:gap-y-0.5 w-full">
+            <h2 className="text-base text-balance font-medium leading-6 text-white text-left">
               {testimonial.text}
             </h2>
-            <p className="text-white/60 text-balance text-sm font-normal text-center md:text-left">
+            <p className="text-white/60 text-balance text-sm font-normal text-left">
               This is a description for card {testimonial.id}.
             </p>
           </div>
-          <button className="text-white border shrink-0 w-full md:w-fit px-4 py-2 rounded-full mt-4 hover:bg-white hover:text-neutral-900 transition-colors">
+          <button className="text-white/70 text-sm md:text-balance md:border shrink-0 w-fit md:px-4 py-2 rounded-full hover:text-white md:hover:bg-white font-normal md:hover:text-neutral-900 transition-colors">
             Read more
           </button>
         </div>
