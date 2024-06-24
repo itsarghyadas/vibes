@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./vestaboard.css";
 
 type VestabaordProps = {
   beginStr: string;

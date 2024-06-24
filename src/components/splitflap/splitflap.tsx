@@ -14,11 +14,11 @@ type SplitFlipAnimationProps = {
 const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
   beginStr,
   endStr,
-  speed = 0.17,
+  speed = 0.15,
   rows,
   columns,
-  align = "left",
-  verticalAlign = "top",
+  align,
+  verticalAlign,
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -155,7 +155,7 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
     const strCount: number[] = [];
     const flag: boolean[] = [];
     for (let x = 0; x < totalFlaps; x++) {
-      strCount[x] = Math.floor(Math.random() * char.length); // Initialize with random character index
+      strCount[x] = Math.floor(Math.random() * char.length); // Randomize starting character
       flag[x] = false;
     }
     let flag2 = true;
@@ -163,19 +163,12 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
     const flipInterval = setInterval(() => {
       if (a1 && a2 && b1 && b2) {
         for (let x = 0; x < totalFlaps; x++) {
-          if (endStrArray[x] !== " ") {
-            // Only flip if the target character is not a space
-            if (b1[x].innerHTML === endStrArray[x])
-              dontFlipIt(x, a1, a2, b1, b2, char, strCount, flag);
-            else flipIt(x, a1, a2, b1, b2, char, strCount);
-            if (flag.every((e) => e) && flag2) {
-              flag2 = false;
-              changeDestination(beginStrArray, endStrArray, flag);
-            }
-          } else {
-            // Reset the background color for empty boxes
-            a2[x].style.backgroundColor = "#1a1a1a";
-            b2[x].style.backgroundColor = "#1a1a1a";
+          if (b1[x].innerHTML === endStrArray[x])
+            dontFlipIt(x, a1, a2, b1, b2, char, strCount, flag);
+          else flipIt(x, a1, a2, b1, b2, char, strCount);
+          if (flag.every((e) => e) && flag2) {
+            flag2 = false;
+            changeDestination(beginStrArray, endStrArray, flag);
           }
         }
       }
@@ -244,35 +237,6 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
     };
   }, [beginStr, endStr, speed, rows, columns, align, verticalAlign]);
 
-  const getAlignmentStyle = () => {
-    let justifyContent;
-    let alignItems;
-
-    switch (align) {
-      case "center":
-        justifyContent = "center";
-        break;
-      case "right":
-        justifyContent = "flex-end";
-        break;
-      default:
-        justifyContent = "flex-start";
-    }
-
-    switch (verticalAlign) {
-      case "middle":
-        alignItems = "center";
-        break;
-      case "bottom":
-        alignItems = "flex-end";
-        break;
-      default:
-        alignItems = "flex-start";
-    }
-
-    return { justifyContent, alignItems };
-  };
-
   useEffect(() => {
     const div = divRef.current;
     if (div) {
@@ -290,7 +254,6 @@ const SplitFlipAnimation: React.FC<SplitFlipAnimationProps> = ({
           gridTemplateRows: `repeat(${rows}, 1fr)`,
           gridTemplateColumns: `repeat(${columns}, 1fr)`,
           gap: "10px",
-          ...getAlignmentStyle(),
         }}
       ></div>
     </div>
