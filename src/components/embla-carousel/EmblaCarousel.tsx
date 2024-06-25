@@ -299,7 +299,7 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
   ]);
 
   return (
-    <div className="embla font-spline">
+    <div className="embla">
       <div className="embla__viewport py-10" ref={emblaRef}>
         <div className="embla__container flex">
           {slides.map((slide, index) => (
@@ -333,10 +333,10 @@ const EmblaCarousel: React.FC<EmblaCarouselPropType> = (props) => {
             <DotButton
               key={index}
               onClick={() => onDotButtonClick(index)}
-              className={"embla__dot bg-transparent touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0 w-[1.5rem] h-[1rem] items-center justify-center rounded-md [-webkit-tap-highlight-color:rgba(255,255,255,0)] [-webkit-appearance:none] after:border-t-2 after:border-[#ffffff25] after:w-full after:h-full after:flex after:items-center after:justify-center after:content-['']".concat(
+              className={"embla__dot bg-transparent relative touch-manipulation inline-flex no-underline cursor-pointer border-0 p-0 m-0 w-[1.5rem] h-5 items-center justify-center rounded-md [-webkit-tap-highlight-color:rgba(255,255,255,0)] [-webkit-appearance:none] after:bg-[#ffffff25] after:w-full after:h-0.5 after:flex after:items-center after:justify-center after:content-['']".concat(
                 index === selectedIndex
-                  ? " embla__dot--selected after:border-t-[#ea3ba7] after:transition-all"
-                  : ""
+                  ? " embla__dot--selected before:absolute before:left-0 before:bg-[#ea3ba7] before:h-0.5 before:top-1/2 before:-translate-y-1/2 before:transition-all before:duration-300 before:ease-out before:w-full"
+                  : " before:absolute before:left-0 before:bg-[#ea3ba7] before:h-0.5 before:top-1/2 before:-translate-y-1/2 before:transition-all before:duration-300 before:ease-out before:w-0"
               )}
             />
           ))}
