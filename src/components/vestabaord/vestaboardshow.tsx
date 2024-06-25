@@ -158,6 +158,7 @@ export default function VestaboardShow({
       </div>
 
       <Vestabaord
+        key={resetKey}
         beginStr={beginStr}
         endStr={endStr}
         speed={speed}

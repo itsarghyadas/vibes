@@ -11,7 +11,14 @@ type VestabaordProps = {
   verticalAlign?: "top" | "middle" | "bottom";
 };
 
-type Character = { prevChar: string; nextChar: string; className: string };
+type Character = {
+  prevChar: string;
+  nextChar: string;
+  className: string;
+  flipClass: string;
+  flipToggle: boolean;
+  speed: number;
+};
 type Row = Character[];
 type State = Row[];
 const CHARACTERS =
@@ -28,7 +35,14 @@ const getState = (
   const state: State = Array(rows)
     .fill(null)
     .map(() =>
-      Array(columns).fill({ prevChar: " ", nextChar: " ", className: "" })
+      Array(columns).fill({
+        prevChar: " ",
+        nextChar: " ",
+        className: "",
+        flipClass: "",
+        flipToggle: false,
+        speed: 0.15,
+      })
     );
 
   const startRow =
@@ -55,6 +69,9 @@ const getState = (
             prevChar: char,
             nextChar: char,
             className: "",
+            flipClass: "",
+            flipToggle: false,
+            speed: 0.15,
           };
         }
       }
@@ -79,13 +96,21 @@ const calculateNextState = (
       const targetChar = endState[rowIndex][colIndex].nextChar;
 
       const nextChar =
-        character.nextChar === targetChar
+        targetChar === " "
+          ? " "
+          : character.nextChar === targetChar
           ? targetChar
           : CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+      const className = nextChar === targetChar ? "final" : "";
+      const flipClass = nextChar !== character.nextChar ? "flip" : "";
+      const flipToggle = !character.flipToggle;
       return {
         prevChar: character.nextChar,
         nextChar,
-        className: character.nextChar !== nextChar ? "flip" : "",
+        className,
+        flipClass,
+        flipToggle,
+        speed: 0.15,
       };
     })
   );
@@ -101,7 +126,9 @@ const Vestabaord: React.FC<VestabaordProps> = ({
   verticalAlign = "top",
 }) => {
   const [state, setState] = useState<State>(
-    getState(beginStr, rows, columns, verticalAlign, align)
+    getState(beginStr, rows, columns, verticalAlign, align).map(
+      (row) => row.map((char) => ({ ...char, speed })) // Initialize speed in state
+    )
   );
 
   useEffect(() => {
@@ -114,20 +141,24 @@ const Vestabaord: React.FC<VestabaordProps> = ({
           columns,
           verticalAlign,
           align
+        ).map(
+          (row) => row.map((char) => ({ ...char, speed })) // Update speed in new state
         );
+        const endState = getState(endStr, rows, columns, verticalAlign, align);
         if (
           newState.flat().every((char, idx) => {
-            const endState = getState(
-              endStr,
-              rows,
-              columns,
-              verticalAlign,
-              align
-            );
             return char.nextChar === endState.flat()[idx].nextChar;
           })
         ) {
           clearInterval(interval);
+          return newState.map((row) =>
+            row.map((char) => ({
+              ...char,
+              prevChar: char.nextChar,
+              flipClass: "",
+              flipToggle: false,
+            }))
+          );
         }
         return newState;
       });
@@ -137,37 +168,51 @@ const Vestabaord: React.FC<VestabaordProps> = ({
   }, [speed, endStr, rows, columns, verticalAlign, align]);
 
   useEffect(() => {
-    setState(getState(beginStr, rows, columns, verticalAlign, align));
-  }, [beginStr, rows, columns, verticalAlign, align]);
-
-  const containerStyle: React.CSSProperties = {
-    display: "grid",
-    gridTemplateRows: `repeat(${rows}, 1fr)`,
-    gridTemplateColumns: `repeat(${columns}, 1fr)`,
-    gap: "10px",
-  };
+    setState(
+      getState(beginStr, rows, columns, verticalAlign, align).map((row) =>
+        row.map((char) => ({ ...char, speed }))
+      )
+    );
+  }, [beginStr, rows, columns, verticalAlign, align, speed]);
 
   return (
     <div className="max-w-5xl mx-auto animated-div shadow-[10px_10px_10px_10px_rgba(0,0,0,0.45)] bg-neutral-900/50 backdrop-blur border-[20px] border-neutral-950/80 p-5 rounded-lg">
-      <div style={containerStyle}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateRows: `repeat(${rows}, 1fr)`,
+          gridTemplateColumns: `repeat(${columns}, 1fr)`,
+          gap: "10px",
+        }}
+      >
         {state.flat().map((character, index) => (
           <div
-            key={index}
-            className={`relative min-w-[55px] h-20 leading-[80px] text-4xl text-center text-[#d3d3d3] shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.5)] rounded-md ${character.className}`}
+            key={`${index}-${character.flipToggle}`}
+            className="relative min-w-[55px] h-20 leading-[80px] text-4xl text-center text-[#d3d3d3] shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.5)] rounded-md"
           >
-            <div className="relative h-10 w-full rounded-t-md overflow-hidden z-0 shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.5)] rounded-md">
+            <div className="top relative h-10 w-full rounded-t-md overflow-hidden z-0 shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.5)] rounded-md">
               {character.prevChar}
             </div>
 
-            <div className="relative h-20 w-full -mt-10 rounded-md -z-[1] bg-[#000000] bg-[linear-gradient(rgba(0,0,0,0),_#1a1a1a)] origin-center shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.8)]">
+            <div
+              className={`bottom relative h-20 w-full -mt-10 rounded-md -z-[1] bg-[#1a1a1a] bg-[linear-gradient(rgba(0,0,0,0),_#1a1a1a)] origin-center shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.8)] ${
+                character.flipClass === "flip" ? "flip1" : ""
+              }`}
+              style={{ animationDuration: `${character.speed}s` }}
+            >
+              {character.prevChar}
+            </div>
+
+            <div
+              className={`nextHalf relative h-10 w-full -mt-20 overflow-hidden rounded-t-md z-[2] bg-[#1a1a1a] bg-[linear-gradient(#1a1a1a,_rgba(0,0,0,0));] origin-bottom shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.8)] ${
+                character.flipClass === "flip" ? "flip2" : ""
+              }`}
+              style={{ animationDuration: `${character.speed}s` }}
+            >
               {character.nextChar}
             </div>
 
-            <div className="relative h-10 w-full -mt-20 overflow-hidden rounded-t-md z-[2] bg-[#000000] bg-[linear-gradient(#1a1a1a,_rgba(0,0,0,0));] origin-bottom shadow-[inset_2px_2px_2px_2px_rgba(0,0,0,0.8)]">
-              {character.nextChar}
-            </div>
-
-            <div className="relative h-20 w-full bg-[#1a1a1a] -mt-10 rounded-md -z-[3]">
+            <div className="nextFull relative h-20 w-full bg-[#1a1a1a] -mt-10 rounded-md -z-[3]">
               {character.nextChar}
             </div>
           </div>

@@ -110,7 +110,7 @@ const EmblaCarouselShow: React.FC = () => {
 
   return (
     <section className="bg-neutral-900">
-      <div className="max-w-7xl [-webkit-mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] mx-auto min-h-screen overflow-hidden p-5 flex items-center justify-center w-full">
+      <div className="max-w-7xl md:[-webkit-mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] md:[mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] mx-auto min-h-screen overflow-hidden p-5 flex items-center justify-center w-full">
         <EmblaCarousel
           slides={slides}
           options={OPTIONS}
