@@ -24,6 +24,9 @@ type State = Row[];
 const CHARACTERS =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 !@#$()-+&=;:'\"%,.".split("");
 
+const getRandomChar = () =>
+  CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+
 const getState = (
   text: string,
   rows: number,
@@ -36,7 +39,7 @@ const getState = (
     .fill(null)
     .map(() =>
       Array(columns).fill({
-        prevChar: " ",
+        prevChar: getRandomChar(),
         nextChar: " ",
         className: "",
         flipClass: "",
@@ -127,7 +130,7 @@ const Vestabaord: React.FC<VestabaordProps> = ({
 }) => {
   const [state, setState] = useState<State>(
     getState(beginStr, rows, columns, verticalAlign, align).map(
-      (row) => row.map((char) => ({ ...char, speed })) // Initialize speed in state
+      (row) => row.map((char) => ({ ...char, speed }))
     )
   );
 
@@ -142,7 +145,7 @@ const Vestabaord: React.FC<VestabaordProps> = ({
           verticalAlign,
           align
         ).map(
-          (row) => row.map((char) => ({ ...char, speed })) // Update speed in new state
+          (row) => row.map((char) => ({ ...char, speed }))
         );
         const endState = getState(endStr, rows, columns, verticalAlign, align);
         if (
