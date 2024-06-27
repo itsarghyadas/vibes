@@ -5,6 +5,7 @@ import VestaboardShow from "./components/vestabaord/vestaboardshow";
 import Carousel from "./components/carousel/carousel";
 import EmblaCarouselShow from "./components/embla-carousel/Carousel";
 import NavAnimate from "./components/navigation/navanimate";
+import NavMenu from "./components/navigation/navmenu";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Route path="/embla-carousel" element={<EmblaCarouselShow />} />
       <Route path="/" element={<Homepage />} />
       <Route path="/navanimate" element={<NavAnimate />} />
+      <Route path="/navmenu" element={<NavMenu />} />
     </Routes>
   );
 }

@@ -4,7 +4,7 @@
   position: absolute;
   background: hsl(0, 0%, 95%);
   pointer-events: none;
-  z-index: -2;
+  z-index: 0;
   top: var(--top);
   right: var(--right);
   bottom: var(--bottom);
@@ -44,6 +44,14 @@
     anchor-name: --profit;
   }
 
+  .listitem:nth-of-type(5) .listitemcontainer {
+    anchor-name: --about;
+  }
+
+  .listitem:nth-of-type(6) .listitemcontainer {
+    anchor-name: --contact;
+  }
+
   :root {
     --anchor: --develop;
   }
@@ -62,6 +70,14 @@
 
   :root:has(.listitem:nth-of-type(4):hover) {
     --anchor: --profit;
+  }
+
+  :root:has(.listitem:nth-of-type(5):hover) {
+    --anchor: --about;
+  }
+
+  :root:has(.listitem:nth-of-type(6):hover) {
+    --anchor: --contact;
   }
 
   .list::after {

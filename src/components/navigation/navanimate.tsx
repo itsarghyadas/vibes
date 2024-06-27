@@ -39,8 +39,10 @@ const NavAnimate = () => {
           LIST.style.setProperty("--left", `${BOUNDS.left}px`);
           LIST.style.setProperty("--height", `${BOUNDS.height}px`);
           LIST.style.setProperty("--width", `${BOUNDS.width}px`);
+          console.log(BOUNDS);
         }
       };
+      // measure on mount
       const UPDATE = ({ x, y }: { x: number; y: number }) => {
         const ARTICLE = document
           .elementFromPoint(x, y)
@@ -60,7 +62,7 @@ const NavAnimate = () => {
     <main className="max-w-4xl mx-auto flex items-center justify-center h-screen">
       <ul className="list grid grid-cols-2 list-none p-0 m-0">
         {items.map((item, index) => (
-          <li key={index} className="listitem p-5 list-none cursor-pointer">
+          <li key={index} className="listitem list-none cursor-pointer z-10">
             <div className="listitemcontainer">
               <a href="#">
                 <h3>{item.title}</h3>
