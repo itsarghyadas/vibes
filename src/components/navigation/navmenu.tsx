@@ -1,34 +1,48 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 
-const items = [
-  {
-    title: "Preview.",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias fuga et ab magnam aliquam commodi ratione vel fugit nesciunt voluptatibus.",
-  },
-  {
-    title: "Preview.",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias fuga et ab magnam aliquam commodi ratione vel fugit nesciunt voluptatibus.",
-  },
-  {
-    title: "Preview.",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias fuga et ab magnam aliquam commodi ratione vel fugit nesciunt voluptatibus.",
-  },
-  {
-    title: "Preview.",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima alias fuga et ab magnam aliquam commodi ratione vel fugit nesciunt voluptatibus.",
-  },
-];
+type InnerItem = {
+  title: string;
+  content: string;
+  href: string;
+};
 
-const NavMenu = () => {
+type MenuItem = {
+  title: string;
+  description: string;
+  subMenuItems: SubMenuItem[];
+};
+
+type SubMenuItem = {
+  title: string;
+  content: string;
+  href: string;
+};
+
+const NavMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
+  const [innerItems, setInnerItems] = useState<InnerItem[]>([]);
+  const [activeTitle, setActiveTitle] = useState<string>(
+    mainMenuItems[0]?.title || ""
+  );
+
+  useEffect(() => {
+    if (mainMenuItems.length > 0) {
+      setInnerItems(mainMenuItems[0].subMenuItems);
+    }
+  }, [mainMenuItems]);
+
+  const handleClick = (title: string) => {
+    setActiveTitle(title);
+    const selectedMenuItem = mainMenuItems.find((item) => item.title === title);
+    if (selectedMenuItem) {
+      setInnerItems(selectedMenuItem.subMenuItems);
+    }
+  };
+
   return (
-    <NavigationMenu.Root className="relative z-[1] p-4 flex w-screen justify-center">
-      <NavigationMenu.List className="center shadow-blackA4 m-0 flex list-none rounded-[6px] bg-white p-1 shadow-[0_2px_10px]">
+    <NavigationMenu.Root className="relative z-[1] p-4 flex justify-center">
+      <NavigationMenu.List className="shadow-blackA4 m-0 flex list-none rounded-[6px] bg-white shadow-[0_2px_10px]">
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
             data-state="open"
@@ -40,12 +54,49 @@ const NavMenu = () => {
               aria-hidden
             />
           </NavigationMenu.Trigger>
+
           <NavigationMenu.Content
-            data-state="open"
-            className="content-container data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight border data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute top-0 left-0 w-full sm:w-[800px]"
+            /*    forceMount */
+            className="content-container data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight border data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight w-[100ch] flex h-full gap-x-5 rounded-lg "
             style={{ pointerEvents: "auto" }}
           >
-            <ListItem />
+            <div className="relative border-r h-full min-w-[220px]">
+              <ul className="w-full list grid gap-2 list-none p-2 m-0 ">
+                {mainMenuItems.map((menuItem, index) => (
+                  <ListItem
+                    key={index}
+                    title={menuItem.title}
+                    content={menuItem.description}
+                    href="#"
+                    isActive={activeTitle === menuItem.title}
+                    onClick={() => handleClick(menuItem.title)}
+                  />
+                ))}
+              </ul>
+            </div>
+            <ul
+              className={`list grid ${
+                innerItems.length < 4 ? "grid-cols-1" : "grid-cols-2"
+              } gap-2 items-start justify-center h-full list-none p-2 m-0 min-w-[400px]`}
+            >
+              {innerItems.map((item, index) => (
+                <ListItem
+                  key={index}
+                  title={item.title}
+                  content={item.content}
+                  href={item.href}
+                  isActive={false}
+                  onClick={() => {}}
+                />
+              ))}
+            </ul>
+            <div className="w-full bg-[#5F49F4] p-4 m-2 relative overflow-hidden rounded-lg">
+              <img
+                className="w-full h-full absolute p-4 object-contain aspect-auto top-20 -right-10"
+                src="/react-icon-png.png"
+                alt=""
+              />
+            </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
 
@@ -61,67 +112,85 @@ const NavMenu = () => {
   );
 };
 
-const ListItem = () => {
+const ListItem = ({
+  title,
+  content,
+  href,
+  isActive,
+  onClick,
+}: {
+  title: string;
+  content: string;
+  href: string;
+  isActive: boolean;
+  onClick: () => void;
+}) => {
   useEffect(() => {
-    if (!CSS.supports("anchor-name: --anchor")) {
-      console.log("supports");
-      const LIST = document.querySelector(".list") as HTMLElement;
-      console.log(LIST);
-      LIST.dataset.enhanced = "true";
-      let current: HTMLElement | null = null;
-      const sync = () => {
-        if (current) {
-          const parent = document.querySelector(".content-container");
-          if (parent) {
-            const parentBounds = parent.getBoundingClientRect();
-            const currentBounds = current.getBoundingClientRect();
+    const LIST = document.querySelectorAll(".list") as NodeListOf<HTMLElement>;
+    LIST.forEach((list) => {
+      list.dataset.enhanced = "true";
+    });
+    let current: HTMLElement | null = null;
+    const sync = () => {
+      if (current) {
+        const parent = document.querySelector(".content-container");
+        if (parent) {
+          const parentBounds = parent.getBoundingClientRect();
+          const currentBounds = current.getBoundingClientRect();
 
-            const relativeTop = currentBounds.top - parentBounds.top;
-            const relativeLeft = currentBounds.left - parentBounds.left;
-            const relativeRight = parentBounds.right - currentBounds.right;
-            const relativeBottom = parentBounds.bottom - currentBounds.bottom;
+          const relativeTop = currentBounds.top - parentBounds.top;
+          const relativeLeft = currentBounds.left - parentBounds.left;
+          const relativeRight = parentBounds.right - currentBounds.right;
+          const relativeBottom = parentBounds.bottom - currentBounds.bottom;
 
-            const relativeHeight = currentBounds.height;
-            const relativeWidth = currentBounds.width;
+          const relativeHeight = currentBounds.height;
+          const relativeWidth = currentBounds.width;
 
-            LIST.style.setProperty("--top", `${relativeTop}px`);
-            LIST.style.setProperty("--right", `${relativeRight}px`);
-            LIST.style.setProperty("--bottom", `${relativeBottom}px`);
-            LIST.style.setProperty("--left", `${relativeLeft}px`);
-            LIST.style.setProperty("--height", `${relativeHeight}px`);
-            LIST.style.setProperty("--width", `${relativeWidth}px`);
-          }
+          LIST.forEach((list) => {
+            list.dataset.enhanced = "true";
+            list.style.setProperty("--top", `${relativeTop}px`);
+            list.style.setProperty("--right", `${relativeRight}px`);
+            list.style.setProperty("--bottom", `${relativeBottom}px`);
+            list.style.setProperty("--left", `${relativeLeft}px`);
+            list.style.setProperty("--height", `${relativeHeight}px`);
+            list.style.setProperty("--width", `${relativeWidth}px`);
+          });
         }
-      };
-      const UPDATE = ({ x, y }: { x: number; y: number }) => {
-        console.log({ x, y });
-        const ARTICLE = document
-          .elementFromPoint(x, y)
-          ?.closest(".listitem")
-          ?.querySelector(".listitemcontainer") as HTMLElement | null;
-        if (ARTICLE !== current) {
-          current = ARTICLE;
-          sync();
-        }
-      };
-      LIST.addEventListener("pointermove", UPDATE);
-      window.addEventListener("resize", sync);
-    }
+      }
+    };
+    const UPDATE = ({ x, y }: { x: number; y: number }) => {
+      const ARTICLE = document
+        .elementFromPoint(x, y)
+        ?.closest(".listitem") as HTMLElement | null;
+      if (ARTICLE !== current) {
+        current = ARTICLE;
+        sync();
+      }
+    };
+    LIST.forEach((list) => {
+      list.addEventListener("pointermove", UPDATE);
+    });
+    window.addEventListener("resize", sync);
   }, []);
 
   return (
-    <ul className="list grid grid-cols-2 list-none p-0 m-0">
-      {items.map((item, index) => (
-        <li key={index} className="listitem list-none cursor-pointer z-10">
-          <div className="listitemcontainer">
-            <a href="#">
-              <h3>{item.title}</h3>
-              <p>{item.content}</p>
-            </a>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <li
+      className={`listitem list-none cursor-pointer z-10 h-full transition-colors duration-300 ${
+        isActive ? "bg-neutral-200/50 rounded-lg" : ""
+      }`}
+      data-item-anchor={`--${title.toLowerCase()}`}
+    >
+      <div>
+        <a
+          href={href}
+          onClick={onClick}
+          className="listitemcontainer animate-text h-full flex flex-col gap-y-0.5 p-4 relative"
+        >
+          <h3 className="text-base font-medium">{title}</h3>
+          <p className="text-sm text-neutral-500">{content}</p>
+        </a>
+      </div>
+    </li>
   );
 };
 
