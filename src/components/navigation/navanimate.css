@@ -1,8 +1,9 @@
 .list::after {
   border-radius: 0.5rem;
+  border: 1px solid rgb(48, 47, 47);
   content: "";
   position: absolute;
-  background: hsl(0, 0%, 95%);
+  background: #39415050;
   pointer-events: none;
   z-index: 0;
   top: var(--top);
@@ -32,7 +33,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: hsl(0 0% 10%);
+  /*   background: hsl(0 0% 10%); */
   border-radius: 1rem;
   opacity: var(--li-active, 0);
   transition: opacity 0.2s;

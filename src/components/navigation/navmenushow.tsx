@@ -37,6 +37,21 @@ const mainMenuItems: MenuItem[] = [
         content: "Second Submenu Content",
         href: "/second-submenu",
       },
+      {
+        title: "Second Submenu",
+        content: "Second Submenu Content",
+        href: "/second-submenu",
+      },
+      {
+        title: "Second Submenu",
+        content: "Second Submenu Content",
+        href: "/second-submenu",
+      },
+      {
+        title: "Second Submenu",
+        content: "Second Submenu Content",
+        href: "/second-submenu",
+      },
     ],
   },
   {
@@ -53,11 +68,61 @@ const mainMenuItems: MenuItem[] = [
         content: "Fourth Submenu Content",
         href: "/fourth-submenu",
       },
+      {
+        title: "Fourth Submenu",
+        content: "Fourth Submenu Content",
+        href: "/fourth-submenu",
+      },
+    ],
+  },
+  {
+    title: "Second Menu",
+    description: "Second Description",
+    subMenuItems: [
+      {
+        title: "Third Submenu",
+        content: "Third Submenu Content",
+        href: "/third-submenu",
+      },
+      {
+        title: "Fourth Submenu",
+        content: "Fourth Submenu Content",
+        href: "/fourth-submenu",
+      },
+      {
+        title: "Fourth Submenu",
+        content: "Fourth Submenu Content",
+        href: "/fourth-submenu",
+      },
+    ],
+  },
+  {
+    title: "Second Menu",
+    description: "Second Description",
+    subMenuItems: [
+      {
+        title: "Third Submenu",
+        content: "Third Submenu Content",
+        href: "/third-submenu",
+      },
+      {
+        title: "Fourth Submenu",
+        content: "Fourth Submenu Content",
+        href: "/fourth-submenu",
+      },
+      {
+        title: "Fourth Submenu",
+        content: "Fourth Submenu Content",
+        href: "/fourth-submenu",
+      },
     ],
   },
 ];
 
 export default function NavMenuShow() {
-  console.log(mainMenuItems); // Move this line here
-  return <NavMenu mainMenuItems={mainMenuItems} />;
+  return (
+    <section className="w-full bg-[#07090D] h-screen p-10 relative">
+      <NavMenu mainMenuItems={mainMenuItems} />
+    </section>
+  );
 }
