@@ -5,7 +5,6 @@ const links = [
   { to: "/vestaboard", text: "Vestabord" },
   { to: "/carousel", text: "Carousel" },
   { to: "/embla-carousel", text: "Embla Carousel" },
-  { to: "/navanimate", text: "Nav Animate" },
   { to: "/navmenu", text: "Nav Menu" },
 ];
 

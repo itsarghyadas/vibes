@@ -56,12 +56,12 @@ const NavMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
           </NavigationMenu.Trigger>
 
           <NavigationMenu.Content
-            className="data-[motion=from-start]:animate-enterFromRight bg-[#394150]/50 rounded-md data-[motion=from-end]:animate-enterFromLeft data-[motion=to-start]:animate-exitToRight data-[motion=to-end]:animate-exitToLeft absolute top-0 left-0 w-full sm:w-auto"
+            className="data-[motion=from-start]:animate-enterFromRight bg-[#394150]/50 rounded-2xl data-[motion=from-end]:animate-enterFromLeft data-[motion=to-start]:animate-exitToRight data-[motion=to-end]:animate-exitToLeft absolute top-0 left-0 w-full sm:w-auto"
             style={{ pointerEvents: "auto" }}
           >
-            <div className="grid list-none content-container grid-cols-[220px_1fr_250px] border border-[#394150]/50 rounded-lg">
-              <div className="border-r border-[#14181F] h-full bg-[#07090D]/50 backdrop-blur-md rounded-l-md">
-                <ul className="w-full list grid gap-2 list-none p-2 m-0 ">
+            <div className="grid list-none content-container grid-cols-[250px_1fr_250px] border border-[#394150]/50 rounded-2xl">
+              <div className="border-r border-white/20 h-full bg-[#13171E] backdrop-blur-xl z-10 rounded-l-2xl">
+                <ul className="w-full list grid gap-2 list-none p-3.5 m-0">
                   {mainMenuItems.map((menuItem, index) => (
                     <ListItem
                       key={index}
@@ -77,7 +77,7 @@ const NavMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
               <ul
                 className={`list grid ${
                   innerItems.length < 4 ? "grid-cols-1" : "grid-cols-2"
-                } gap-2 items-start justify-between w-full h-full list-none p-2 m-0 min-w-[480px]`}
+                } gap-2 items-start justify-between w-full h-full list-none p-4 m-0 min-w-[480px]`}
               >
                 {innerItems.map((item, index) => (
                   <ListItem
@@ -101,21 +101,21 @@ const NavMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
           </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="text-violet11 hover:bg-violet3 focus:shadow-violet7 group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
+          <NavigationMenu.Trigger className="text-neutral-300 hover:text-white group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
             Report
             <CaretDownIcon
-              className="text-violet10 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+              className="text-white relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
               aria-hidden
             />
           </NavigationMenu.Trigger>
 
           <NavigationMenu.Content
-            className="data-[motion=from-start]:animate-enterFromRight data-[motion=from-end]:animate-enterFromLeft data-[motion=to-start]:animate-exitToRight data-[motion=to-end]:animate-exitToLeft absolute top-0 left-0 w-full sm:w-auto"
+            className="data-[motion=from-start]:animate-enterFromRight bg-[#394150]/50 rounded-2xl data-[motion=from-end]:animate-enterFromLeft data-[motion=to-start]:animate-exitToRight data-[motion=to-end]:animate-exitToLeft absolute top-0 left-0 w-full sm:w-auto"
             style={{ pointerEvents: "auto" }}
           >
-            <div className="grid list-none content-container grid-cols-[220px_1fr]">
-              <div className="border-r h-full">
-                <ul className="w-full list grid gap-2 list-none p-2 m-0 ">
+            <div className="grid list-none content-container grid-cols-[250px_1fr] border border-[#394150]/50 rounded-2xl">
+              <div className="border-r border-white/20 h-full bg-[#13171E] backdrop-blur-xl z-10 rounded-l-2xl">
+                <ul className="w-full list grid gap-2 list-none p-3.5 m-0 ">
                   {mainMenuItems.map((menuItem, index) => (
                     <ListItem
                       key={index}
@@ -131,7 +131,7 @@ const NavMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
               <ul
                 className={`list grid ${
                   innerItems.length < 4 ? "grid-cols-1" : "grid-cols-2"
-                } gap-2 items-center justify-between w-full h-full list-none p-2 m-0 min-w-[400px]`}
+                } gap-2 items-center justify-between w-full h-full list-none p-4 m-0 min-w-[400px]`}
               >
                 {innerItems.map((item, index) => (
                   <ListItem
@@ -148,23 +148,23 @@ const NavMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
           </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="text-violet11 hover:bg-violet3 focus:shadow-violet7 group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
-            Report
+          <NavigationMenu.Trigger className="text-neutral-300 hover:text-white group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
+            Service
             <CaretDownIcon
-              className="text-violet10 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
+              className="text-white relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-180"
               aria-hidden
             />
           </NavigationMenu.Trigger>
 
           <NavigationMenu.Content
-            className="data-[motion=from-start]:animate-enterFromRight data-[motion=from-end]:animate-enterFromLeft data-[motion=to-start]:animate-exitToRight data-[motion=to-end]:animate-exitToLeft absolute top-0 left-0 w-full sm:w-auto"
+            className="data-[motion=from-start]:animate-enterFromRight bg-[#394150]/50 rounded-2xl data-[motion=from-end]:animate-enterFromLeft data-[motion=to-start]:animate-exitToRight data-[motion=to-end]:animate-exitToLeft absolute top-0 left-0 w-full sm:w-auto"
             style={{ pointerEvents: "auto" }}
           >
-            <div className="grid list-none content-container grid-cols-[1fr]">
+            <div className="grid list-none content-container grid-cols-[1fr] border border-[#394150]/50 rounded-2xl">
               <ul
                 className={`list grid ${
                   innerItems.length < 4 ? "grid-cols-1" : "grid-cols-2"
-                } gap-2 items-center justify-between w-full h-full list-none p-2 m-0 min-w-[400px]`}
+                } gap-2 items-center justify-between w-full h-full rounded-2xl list-none p-2 m-0 min-w-[400px]`}
               >
                 {innerItems.map((item, index) => (
                   <ListItem
@@ -180,11 +180,8 @@ const NavMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
             </div>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-
-        <NavigationMenu.Indicator className="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full z-[1] flex h-[10px] items-end justify-center overflow-hidden transition-[width,transform_250ms_ease]">
-          <div className="relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-white" />
-        </NavigationMenu.Indicator>
       </NavigationMenu.List>
+
       <div className="flex items-center gap-5">
         <button className="text-white">Log In</button>
         <button className="bg-[#5F49F4] p-2 rounded-full">
@@ -264,7 +261,7 @@ const ListItem = ({
 
   return (
     <li
-      className={`listitem list-none cursor-pointer h-full z-10 transition-colors duration-300 ${
+      className={`listitem list-none cursor-pointer h-full z-10 transition-colors duration-300 relative ${
         isActive ? "bg-[#394150]/50 rounded-lg" : ""
       }`}
       data-item-anchor={`--${title.toLowerCase()}`}
@@ -275,8 +272,11 @@ const ListItem = ({
         onClick={onClick}
         className="listitemcontainer animate-text flex flex-col gap-y-0.5 p-4 relative"
       >
-        <h3 className="text-base text-white">{title}</h3>
-        <p className="text-sm text-white/50 font-normal">{content}</p>
+        <h3 className="text-sm text-white">{title}</h3>
+        <p className="text-xs text-white/50 font-normal">{content}</p>
+        {isActive && (
+          <span className="indicator absolute top-[50%] -right-[22px] w-4 h-4 rotate-45 border-r border-t border-white/20 bg-[#13171E] backdrop-blur-md"></span>
+        )}
       </a>
     </li>
   );

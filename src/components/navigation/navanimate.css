@@ -5,7 +5,7 @@
   position: absolute;
   background: #39415050;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   top: var(--top);
   right: var(--right);
   bottom: var(--bottom);
