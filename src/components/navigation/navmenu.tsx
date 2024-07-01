@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
+import "./navanimate.css";
 
 type InnerItem = {
   title: string;
