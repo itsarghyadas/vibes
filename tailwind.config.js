@@ -50,6 +50,14 @@ export default {
           from: { opacity: "1" },
           to: { opacity: "0" },
         },
+        rotate: {
+          "0%": {
+            transform: "rotate(0deg) translate3d(-50%, -50%, 0)",
+          },
+          "100%": {
+            transform: "rotate(1turn) translate3d(-50%, -50%, 0)",
+          },
+        },
       },
     },
     animation: {
@@ -61,6 +69,7 @@ export default {
       enterFromRight: "enterFromRight 250ms ease",
       exitToLeft: "exitToLeft 250ms ease",
       exitToRight: "exitToRight 250ms ease",
+      rotate: "rotate 1500ms linear infinite",
     },
   },
   plugins: [

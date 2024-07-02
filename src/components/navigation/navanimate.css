@@ -33,7 +33,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  /*   background: hsl(0 0% 10%); */
+  background: hsl(0 0% 10%);
   border-radius: 1rem;
   opacity: var(--li-active, 0);
   transition: opacity 0.2s;
