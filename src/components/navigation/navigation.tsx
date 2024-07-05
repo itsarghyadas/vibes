@@ -72,7 +72,7 @@ const Navigation = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
 
   return (
     <>
-      <NavigationMenu.Root className="z-[1] bg-[#394150]/50 max-w-6xl mx-auto rounded-3xl flex items-center justify-between flex-wrap w-full">
+      <NavigationMenu.Root className="relative z-[1] bg-[#394150]/50 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap w-full">
         <div className="flex items-center justify-between w-full p-2">
           <div className="flex items-center gap-5 shrink-0">
             <img src="/nav-logo.png" alt="nav-logo" />
