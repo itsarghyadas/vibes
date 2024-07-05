@@ -1,4 +1,4 @@
-import NavMenu from "./navmenu";
+import Navigation from "./navigation";
 
 type InnerMenuItem = {
   title: string;
@@ -244,10 +244,10 @@ const mainMenuItems: MenuItem[] = [
   },
 ];
 
-export default function NavMenuShow() {
+export default function NavigationPreview() {
   return (
     <section className="w-full bg-[#07090D] h-screen p-10 relative">
-      <NavMenu mainMenuItems={mainMenuItems} />
+      <Navigation mainMenuItems={mainMenuItems} />
     </section>
   );
 }

@@ -4,7 +4,7 @@ import SplitFlapShow from "./components/splitflap/splitflapshow";
 import VestaboardShow from "./components/vestabaord/vestaboardshow";
 import Carousel from "./components/carousel/carousel";
 import EmblaCarouselShow from "./components/embla-carousel/Carousel";
-import NavMenuShow from "./components/navigation/navmenushow";
+import NavMenuShow from "./components/navigation/preview";
 
 export default function App() {
   return (
