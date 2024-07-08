@@ -3,7 +3,6 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Accordion from "@radix-ui/react-accordion";
 import {
   CaretDownIcon,
-  Link2Icon,
   HamburgerMenuIcon,
   ChevronDownIcon,
   Cross1Icon,
@@ -16,6 +15,7 @@ type InnerMenuItem = {
   title: string;
   content: string;
   href: string;
+  icon?: React.ReactNode;
 };
 
 type SubMenuItem = {
@@ -40,12 +40,34 @@ type MenuItem = {
   img?: imageContainer[];
 };
 
-const Navigation = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
+type NavigationProps = {
+  mainMenuItems: MenuItem[];
+  fixed?: boolean;
+};
+
+const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
   const [innerItems, setInnerItems] = useState<InnerMenuItem[]>([]);
   const [activeTitle, setActiveTitle] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const [isScrollingUp, setIsScrollingUp] = useState(false);
 
-  // Add a click handler for the hamburger icon to toggle the mobile menu
+  console.log(prevScrollPos);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setIsScrollingUp(prevScrollPos > currentScrollPos);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
+
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -72,7 +94,15 @@ const Navigation = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
 
   return (
     <>
-      <NavigationMenu.Root className="relative z-[1] bg-[#394150]/50 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap w-full">
+      <NavigationMenu.Root
+        className={`bg-[#394150]/50 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap w-full ${
+          fixed || isScrollingUp
+            ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-5 transition-transform duration-200 ease-out"
+            : prevScrollPos < 10
+            ? "relative"
+            : "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-[-100%] transition-transform duration-200 ease-out"
+        }`}
+      >
         <div className="flex items-center justify-between w-full p-2">
           <div className="flex items-center gap-5 shrink-0">
             <img src="/nav-logo.png" alt="nav-logo" />
@@ -87,7 +117,6 @@ const Navigation = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
                       href={menuItem.href}
                     >
                       {menuItem.title}
-                      <Link2Icon className="text-white -translate-x-[1px] opacity-0 group-hover:translate-x-[1px] group-hover:opacity-100 transition-transform duration-[100] ease-out" />
                     </a>
                   </NavigationMenu.Trigger>
                 ) : (
@@ -124,7 +153,7 @@ const Navigation = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
                           menuItem.subMenuItems[0].title ? "" : "hidden"
                         } h-full bg-[#13171E] backdrop-blur-xl z-10 rounded-l-2xl`}
                       >
-                        <ul className="w-full list grid gap-2 list-none p-3.5 m-0">
+                        <ul className="w-full list grid gap-2 list-none p-2 m-0">
                           {menuItem.subMenuItems.map(
                             (subMenuItem, subIndex) => (
                               <ListItem
@@ -143,8 +172,10 @@ const Navigation = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
                       </div>
                       <ul
                         className={`list grid ${
-                          innerItems.length < 4 ? "grid-cols-1" : "grid-cols-2"
-                        } gap-2 items-start justify-between w-full h-full list-none p-4 m-0 min-w-[480px]`}
+                          innerItems.length < 4
+                            ? "grid-cols-1"
+                            : "grid-cols-1 xl:grid-cols-2"
+                        } gap-2 items-start justify-between w-full h-full list-none p-4 m-0 min-w-[400px] xl:min-w-[500px]`}
                       >
                         {innerItems.map((item, innerIndex) => (
                           <ListItem
@@ -154,6 +185,8 @@ const Navigation = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => {
                             href={item.href}
                             isActive={false}
                             onClick={() => {}}
+                            isInnerMenuItem={true}
+                            icon={item.icon}
                           />
                         ))}
                       </ul>
@@ -232,12 +265,16 @@ const ListItem = ({
   href,
   isActive,
   onClick,
+  isInnerMenuItem,
+  icon,
 }: {
   title: string;
   content: string;
   href: string;
   isActive: boolean;
   onClick: () => void;
+  isInnerMenuItem?: boolean;
+  icon?: React.ReactNode;
 }) => {
   useEffect(() => {
     const LIST = document.querySelectorAll(".list") as NodeListOf<HTMLElement>;
@@ -300,12 +337,24 @@ const ListItem = ({
       <a
         href={href}
         onClick={onClick}
-        className="listitemcontainer animate-text flex flex-col gap-y-0.5 p-4 relative"
+        className="listitemcontainer animate-text flex items-start gap-x-2 p-3 py-2.5 relative"
       >
-        <h3 className="text-sm text-white">{title}</h3>
-        <p className="text-xs text-white/50 font-normal">{content}</p>
+        {isInnerMenuItem && (
+          <div className="w-4 h-4 mt-0.5 bg-white/50 rounded-full">{icon}</div>
+        )}
+        <div className="flex flex-col gap-y-0.5">
+          <h3 className="text-sm text-white">{title}</h3>
+          <p className="text-xs text-white/50 font-normal">{content}</p>
+        </div>
+
         {isActive && (
-          <span className="indicator absolute top-[40%] -right-[22px] w-4 h-4 rotate-45 border-r border-t border-white/20 bg-[#13171E] backdrop-blur-md"></span>
+          <span
+            className="absolute w-4 h-4 top-1/2 -translate-y-1/2 -right-4
+         bg-[#13171E] shadow-[1.5px_0px_0px_rgba(255,255,255,0.2)]"
+            style={{
+              clipPath: "polygon(45% 0%, 45% 100%, 100% 45%)",
+            }}
+          ></span>
         )}
       </a>
     </li>
