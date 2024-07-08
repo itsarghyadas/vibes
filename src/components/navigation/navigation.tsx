@@ -106,9 +106,9 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
             {mainMenuItems.map((menuItem, index) => (
               <NavigationMenu.Item value={menuItem.id} key={index}>
                 {menuItem.href ? (
-                  <NavigationMenu.Trigger className="group">
+                  <NavigationMenu.Trigger>
                     <a
-                      className="text-white/70 hover:text-white group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-normal leading-none outline-none focus:shadow-[0_0_0_2px]"
+                      className="text-white/70 hover:text-white flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-normal leading-none outline-none focus:shadow-[0_0_0_2px]"
                       href={menuItem.href}
                     >
                       {menuItem.title}
@@ -223,19 +223,19 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
               onClick={handleMobileMenuToggle}
             >
               <span
-                className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-5 bg-white ${
+                className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-4 bg-white ${
                   isMobileMenuOpen
                     ? "translate-y-0 rotate-45 "
                     : "-translate-y-1.5"
                 } transition-all duration-150`}
               ></span>
               <span
-                className={`absolute h-0.5 w-5 bg-white ${
+                className={`absolute h-0.5 w-4 bg-white ${
                   isMobileMenuOpen ? "opacity-0" : ""
                 } transition-all duration-75`}
               ></span>
               <span
-                className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-5 bg-white transition-all duration-150 ${
+                className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-4 bg-white transition-all duration-150 ${
                   isMobileMenuOpen
                     ? "translate-y-0 -rotate-45"
                     : "translate-y-1"
@@ -246,8 +246,8 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         </div>
 
         <div
-          className={`w-full lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? "max-h-[calc(100vh-2rem)]" : "max-h-0"
+          className={`w-full lg:hidden overflow-y-auto transition-all duration-300 ease-in-out ${
+            isMobileMenuOpen ? "max-h-[83.33vh]" : "max-h-0"
           }`}
         >
           <div
@@ -392,7 +392,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className="flex">
     <Accordion.Trigger
       className={clsx(
-        "group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between p-2 text-sm leading-none outline-none",
+        "group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between p-2 text-base leading-none outline-none",
         className
       )}
       {...props}
@@ -435,7 +435,7 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
         <AccordionItem value={menuItem.id} key={index}>
           {menuItem.href ? (
             <a
-              className="group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between p-2 text-sm leading-none outline-none"
+              className="group flex h-11 text-white flex-1 cursor-pointer items-center justify-between p-2 text-base leading-none outline-none"
               href={menuItem.href}
             >
               {menuItem.title}
@@ -478,7 +478,7 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
       ))}
       <div className="flex flex-col w-full items-start gap-3.5 p-2">
         <a
-          className="group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between py-2 text-sm leading-none outline-none"
+          className="flex text-white flex-1 cursor-pointer items-center justify-between py-2 text-base leading-none outline-none"
           href="#"
         >
           Log In
