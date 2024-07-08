@@ -93,7 +93,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         className={`bg-[#394150]/50 border border-white/20 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap  ${
           fixed || isScrollingUp
             ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-5 transition-transform duration-200 ease-out"
-            : prevScrollPos < 10
+            : prevScrollPos < 1
             ? "relative"
             : "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-[-100%] transition-transform duration-200 ease-out"
         }`}
