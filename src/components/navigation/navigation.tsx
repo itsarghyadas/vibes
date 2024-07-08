@@ -1,3 +1,9 @@
+/* hambuger menu two line
+cta button different container in the mobiel
+padding overflow
+
+icon container only color and border */
+
 import { useEffect, useState, forwardRef } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Accordion from "@radix-ui/react-accordion";
@@ -46,8 +52,6 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
-
-  console.log(prevScrollPos);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -226,19 +230,14 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
                 className={`absolute top-1/2 h-0.5 w-4 bg-white ${
                   isMobileMenuOpen
                     ? "translate-y-0 rotate-45 "
-                    : "-translate-y-1.5"
+                    : "-translate-y-1"
                 } transition-all duration-150`}
-              ></span>
-              <span
-                className={`absolute h-0.5 w-4 bg-white ${
-                  isMobileMenuOpen ? "opacity-0" : ""
-                } transition-all duration-75`}
               ></span>
               <span
                 className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-4 bg-white transition-all duration-150 ${
                   isMobileMenuOpen
                     ? "translate-y-0 -rotate-45"
-                    : "translate-y-1"
+                    : "translate-y-0.5"
                 }`}
               ></span>
             </div>
@@ -246,16 +245,27 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         </div>
 
         <div
-          className={`w-full menucontainer lg:hidden overflow-y-auto [scroll-padding:20px] transition-all duration-300 ease-in-out ${
+          className={`w-full menucontainer lg:hidden overflow-hidden flex flex-col transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? "max-h-[90svh]" : "max-h-0"
           }`}
         >
           <div
-            className={`${
+            className={`max-h-[calc(100svh-1.25rem)] overflow-y-scroll ${
               isMobileMenuOpen ? "border-t border-white/10" : "border-none"
             }`}
           >
             <AccordionDemo mainMenuItems={mainMenuItems} />
+          </div>
+          <div className="flex flex-col w-full items-start gap-3.5 p-4 border-t border-white/10">
+            <a
+              className="flex text-white flex-1 cursor-pointer items-center justify-between py-2 text-base leading-none outline-none"
+              href="#"
+            >
+              Log In
+            </a>
+            <Button variant="primary" size="small">
+              Book a Demo
+            </Button>
           </div>
         </div>
 
@@ -476,17 +486,6 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
           </AccordionContent>
         </AccordionItem>
       ))}
-      <div className="flex flex-col w-full items-start gap-3.5 p-2">
-        <a
-          className="flex text-white flex-1 cursor-pointer items-center justify-between py-2 text-base leading-none outline-none"
-          href="#"
-        >
-          Log In
-        </a>
-        <Button variant="primary" size="small">
-          Book a Demo
-        </Button>
-      </div>
     </>
   </Accordion.Root>
 );
