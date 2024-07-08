@@ -1,12 +1,7 @@
 import { useEffect, useState, forwardRef } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Accordion from "@radix-ui/react-accordion";
-import {
-  CaretDownIcon,
-  HamburgerMenuIcon,
-  ChevronDownIcon,
-  Cross1Icon,
-} from "@radix-ui/react-icons";
+import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import Button from "../vibesbutton/vibesbutton";
 import "./navanimate.css";
 import clsx from "clsx";
@@ -222,24 +217,37 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
             </Button>
           </div>
 
-          <div className="lg:hidden pr-4">
-            {isMobileMenuOpen ? (
-              <Cross1Icon
-                className="text-white h-5 w-5 cursor-pointer"
-                onClick={handleMobileMenuToggle}
-              />
-            ) : (
-              <HamburgerMenuIcon
-                className="text-white h-5 w-5 cursor-pointer"
-                onClick={handleMobileMenuToggle}
-              />
-            )}
+          <div className="lg:hidden">
+            <div
+              className="relative h-8 w-8 rounded-md flex items-center justify-center group cursor-pointer"
+              onClick={handleMobileMenuToggle}
+            >
+              <span
+                className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-5 bg-white ${
+                  isMobileMenuOpen
+                    ? "translate-y-0 rotate-45 "
+                    : "-translate-y-1.5"
+                } transition-all duration-150`}
+              ></span>
+              <span
+                className={`absolute h-0.5 w-5 bg-white ${
+                  isMobileMenuOpen ? "opacity-0" : ""
+                } transition-all duration-75`}
+              ></span>
+              <span
+                className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-5 bg-white transition-all duration-150 ${
+                  isMobileMenuOpen
+                    ? "translate-y-0 -rotate-45"
+                    : "translate-y-1"
+                }`}
+              ></span>
+            </div>
           </div>
         </div>
 
         <div
           className={`w-full lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? "max-h-[700px]" : "max-h-0"
+            isMobileMenuOpen ? "max-h-[calc(100vh-2rem)]" : "max-h-0"
           }`}
         >
           <div
@@ -384,7 +392,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className="flex">
     <Accordion.Trigger
       className={clsx(
-        "group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between px-5 py-2 text-[15px] leading-none outline-none",
+        "group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between p-2 text-sm leading-none outline-none",
         className
       )}
       {...props}
@@ -411,7 +419,7 @@ const AccordionContent = forwardRef<
     {...props}
     ref={forwardedRef}
   >
-    <div className="py-[15px] px-5 flex flex-col gap-y-2.5">{children}</div>
+    <div className="flex flex-col gap-y-2.5">{children}</div>
   </Accordion.Content>
 ));
 
@@ -422,40 +430,64 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
     defaultValue="item-1"
     collapsible
   >
-    {mainMenuItems.map((menuItem, index) => (
-      <AccordionItem value={menuItem.id} key={index}>
-        {menuItem.href ? (
-          <a
-            className="group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between px-5 py-2 text-[15px] leading-none outline-none"
-            href={menuItem.href}
-          >
-            {menuItem.title}
-          </a>
-        ) : (
-          <AccordionTrigger>{menuItem.title}</AccordionTrigger>
-        )}
-        <AccordionContent>
-          {menuItem.subMenuItems.map((subMenuItem, subIndex) => (
-            <div key={subIndex}>
-              {subMenuItem.innerMenuItems && (
-                <ul className="flex flex-col gap-y-3.5">
-                  {subMenuItem.innerMenuItems.map((innerItem, innerIndex) => (
-                    <li key={innerIndex} className="flex flex-col gap-y-0.5">
-                      <a className="text-sm text-white" href={innerItem.href}>
-                        {innerItem.title}
-                      </a>
-                      <p className="text-xs text-white/50 font-normal">
-                        {innerItem.content}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    ))}
+    <>
+      {mainMenuItems.map((menuItem, index) => (
+        <AccordionItem value={menuItem.id} key={index}>
+          {menuItem.href ? (
+            <a
+              className="group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between p-2 text-sm leading-none outline-none"
+              href={menuItem.href}
+            >
+              {menuItem.title}
+            </a>
+          ) : (
+            <AccordionTrigger>{menuItem.title}</AccordionTrigger>
+          )}
+          <AccordionContent>
+            {menuItem.subMenuItems.map((subMenuItem, subIndex) => (
+              <div key={subIndex}>
+                {subMenuItem.innerMenuItems && (
+                  <ul className="flex flex-col">
+                    {subMenuItem.innerMenuItems.map((innerItem, innerIndex) => (
+                      <li
+                        key={innerIndex}
+                        className="flex items-start gap-x-2 px-3 py-2.5"
+                      >
+                        <div className="w-4 h-4 mt-0.5 bg-white/50 rounded-full">
+                          {innerItem.icon}
+                        </div>
+                        <div className="flex flex-col gap-y-0.5">
+                          <a
+                            className="text-sm text-white"
+                            href={innerItem.href}
+                          >
+                            {innerItem.title}
+                          </a>
+                          <p className="text-xs text-white/50 font-normal">
+                            {innerItem.content}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+      <div className="flex flex-col w-full items-start gap-3.5 p-2">
+        <a
+          className="group flex h-[45px] text-white flex-1 cursor-pointer items-center justify-between py-2 text-sm leading-none outline-none"
+          href="#"
+        >
+          Log In
+        </a>
+        <Button variant="primary" size="small">
+          Book a Demo
+        </Button>
+      </div>
+    </>
   </Accordion.Root>
 );
 
