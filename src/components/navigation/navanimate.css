@@ -62,3 +62,8 @@
 .menucontainer::-webkit-scrollbar {
   display: none;
 }
+
+.menucontainer {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
