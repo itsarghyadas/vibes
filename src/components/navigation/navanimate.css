@@ -1,6 +1,6 @@
 .list::after {
   border-radius: 0.5rem;
-  border: 1px solid rgb(48, 47, 47);
+  border: 1px solid rgba(255, 255, 255, 0.02);
   content: "";
   position: absolute;
   background: #39415050;

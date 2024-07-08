@@ -90,7 +90,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
   return (
     <>
       <NavigationMenu.Root
-        className={`bg-[#394150]/50 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap  ${
+        className={`bg-[#394150]/50 border border-white/20 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap  ${
           fixed || isScrollingUp
             ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-5 transition-transform duration-200 ease-out"
             : prevScrollPos < 10
@@ -133,7 +133,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
                     style={{ pointerEvents: "auto" }}
                   >
                     <div
-                      className={`grid list-none content-container border border-[#394150]/50 rounded-2xl ${
+                      className={`grid list-none content-container border border-white/20 rounded-2xl ${
                         menuItem.subMenuItems[0].title && menuItem.img
                           ? "grid-cols-[250px_1fr_300px]"
                           : menuItem.subMenuItems[0].title
@@ -206,7 +206,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
             ))}
 
             <NavigationMenu.Indicator className="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full z-[1] flex h-[10px] items-end justify-center transition-[width,transform_250ms_ease]">
-              <div className="relative top-[50%] -left-2 h-[1px] w-full rounded-tl-[2px] bg-gradient-to-r from-[#EA3BA7]/0 via-[#EA3BA7] to-[#EA3BA7]/0 mix-blend-overlay" />
+              <div className="relative top-[calc(50%+2px)] left-0 h-[1px] w-full rounded-tl-[2px] bg-gradient-to-r from-[#EA3BA7]/0 via-[#EA3BA7] to-[#EA3BA7]/0 mix-blend-overlay" />
             </NavigationMenu.Indicator>
           </NavigationMenu.List>
 
@@ -246,7 +246,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         </div>
 
         <div
-          className={`w-full menucontainer lg:hidden overflow-y-auto transition-all duration-300 ease-in-out ${
+          className={`w-full menucontainer lg:hidden overflow-y-auto [scroll-padding:20px] transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? "max-h-[90svh]" : "max-h-0"
           }`}
         >
@@ -337,15 +337,15 @@ const ListItem = ({
 
   return (
     <li
-      className={`listitem list-none cursor-pointer h-full z-10 transition-colors duration-300 relative ${
-        isActive ? "bg-[#394150]/50 rounded-lg" : "rounded-lg"
+      className={`listitem list-none cursor-pointer rounded-lg h-full z-10 transition-all duration-150 relative ${
+        isActive ? "bg-[#394150]/50 " : ""
       }`}
       key={title}
     >
       <a
         href={href}
         onClick={onClick}
-        className="listitemcontainer animate-text flex items-start gap-x-2 p-3 py-2.5 relative"
+        className="listitemcontainer flex items-start gap-x-2 p-3 py-2.5 relative"
       >
         {isInnerMenuItem && (
           <div className="w-4 h-4 mt-0.5 bg-white/50 rounded-full">{icon}</div>

@@ -252,7 +252,7 @@ const mainMenuItems: MenuItem[] = [
 export default function NavigationPreview() {
   return (
     <section className="w-full bg-[#07090D] h-[200vh] p-5 pb-0 relative">
-      <Navigation mainMenuItems={mainMenuItems} fixed={true} />
+      <Navigation mainMenuItems={mainMenuItems} fixed={false} />
     </section>
   );
 }
