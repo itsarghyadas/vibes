@@ -90,7 +90,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
   return (
     <>
       <NavigationMenu.Root
-        className={`bg-[#394150]/50 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap w-full ${
+        className={`bg-[#394150]/50 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap  ${
           fixed || isScrollingUp
             ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-5 transition-transform duration-200 ease-out"
             : prevScrollPos < 10
@@ -223,7 +223,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
               onClick={handleMobileMenuToggle}
             >
               <span
-                className={`absolute top-1/2 -translate-y-1/2 h-0.5 w-4 bg-white ${
+                className={`absolute top-1/2 h-0.5 w-4 bg-white ${
                   isMobileMenuOpen
                     ? "translate-y-0 rotate-45 "
                     : "-translate-y-1.5"
@@ -246,7 +246,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         </div>
 
         <div
-          className={`w-full lg:hidden overflow-y-auto transition-all duration-300 ease-in-out ${
+          className={`w-full lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? "max-h-[83.33vh]" : "max-h-0"
           }`}
         >
