@@ -58,3 +58,7 @@
   animation: animateText 0.5s ease-out forwards;
   transition: all 0.3s ease-in-out;
 }
+
+.menucontainer::-webkit-scrollbar {
+  display: none;
+}

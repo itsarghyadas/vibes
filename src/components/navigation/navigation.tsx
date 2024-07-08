@@ -246,8 +246,8 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         </div>
 
         <div
-          className={`w-full lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? "max-h-[83.33vh]" : "max-h-0"
+          className={`w-full menucontainer lg:hidden overflow-y-auto transition-all duration-300 ease-in-out ${
+            isMobileMenuOpen ? "max-h-[90svh]" : "max-h-0"
           }`}
         >
           <div
