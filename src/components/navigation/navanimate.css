@@ -59,7 +59,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* .menucontainer::-webkit-scrollbar {
+.menucontainer::-webkit-scrollbar {
   display: none;
 }
 
@@ -67,4 +67,3 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
- */

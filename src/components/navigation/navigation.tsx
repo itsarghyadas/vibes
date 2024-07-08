@@ -245,12 +245,12 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         </div>
 
         <div
-          className={`w-full menucontainer lg:hidden overflow-hidden flex flex-col transition-all duration-300 ease-in-out ${
+          className={`w-full lg:hidden overflow-hidden flex flex-col transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? "max-h-[90svh]" : "max-h-0"
           }`}
         >
           <div
-            className={`max-h-[calc(100svh-1.25rem)] overflow-y-scroll ${
+            className={`max-h-[calc(100svh-1.25rem)] menucontainer overflow-y-scroll ${
               isMobileMenuOpen ? "border-t border-white/10" : "border-none"
             }`}
           >
@@ -258,12 +258,12 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
           </div>
           <div className="flex flex-col w-full items-start gap-3.5 p-4 border-t border-white/10">
             <a
-              className="flex text-white flex-1 cursor-pointer items-center justify-between py-2 text-base leading-none outline-none"
+              className="flex text-white underline underline-offset-4 items-center justify-center flex-1 cursor-pointer py-2 text-base leading-none outline-none"
               href="#"
             >
               Log In
             </a>
-            <Button variant="primary" size="small">
+            <Button variant="primary" size="small" borderGlow={false}>
               Book a Demo
             </Button>
           </div>
