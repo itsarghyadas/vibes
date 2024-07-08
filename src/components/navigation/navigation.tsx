@@ -170,7 +170,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
                           innerItems.length < 4
                             ? "grid-cols-1"
                             : "grid-cols-1 xl:grid-cols-2"
-                        } gap-2 items-start justify-between w-full h-full list-none p-4 m-0 min-w-[400px] xl:min-w-[500px]`}
+                        } gap-2 items-start justify-between w-full h-full list-none p-2 m-0 min-w-[400px] xl:min-w-[500px]`}
                       >
                         {innerItems.map((item, innerIndex) => (
                           <ListItem
