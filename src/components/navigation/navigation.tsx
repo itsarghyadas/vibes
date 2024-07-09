@@ -94,7 +94,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
   return (
     <>
       <NavigationMenu.Root
-        className={`bg-[#394150]/50 border border-white/20 max-h-[calc(100%-2.5rem)] max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap ${
+        className={`bg-[#394150]/50 border border-white/20 max-h-[calc(100%-2.5rem)] max-w-6xl mx-auto rounded-[26px] lg:rounded-full flex items-center justify-between flex-wrap ${
           fixed || isScrollingUp
             ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] [transform:translate3d(0px,1.5rem,0px)] transition-transform duration-200 ease-out"
             : prevScrollPos < 1
@@ -221,7 +221,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
             </Button>
           </div>
 
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center gap-3.5">
             <div
               className="relative h-8 w-8 rounded-md flex items-center justify-center group cursor-pointer"
               onClick={handleMobileMenuToggle}
@@ -241,6 +241,14 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
                 }`}
               ></span>
             </div>
+            <Button
+              variant="primary"
+              size="small"
+              borderGlow={false}
+              className="hidden sm:block"
+            >
+              Book a Demo
+            </Button>
           </div>
         </div>
 
@@ -263,7 +271,12 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
             >
               Log In
             </a>
-            <Button variant="primary" size="small" borderGlow={false}>
+            <Button
+              variant="primary"
+              size="small"
+              borderGlow={false}
+              className="sm:hidden"
+            >
               Book a Demo
             </Button>
           </div>

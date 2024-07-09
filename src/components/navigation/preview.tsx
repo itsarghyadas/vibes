@@ -78,11 +78,13 @@ const mainMenuItems: MenuItem[] = [
             title: "First Inner Menu #2",
             content: "First Inner Menu Content",
             href: "#first-inner-menu",
+            icon: <LayersIcon className="w-4 h-4 text-white" />,
           },
           {
             title: "Second Inner Menu #2",
             content: "Second Inner Menu Content",
             href: "#second-inner-menu",
+            icon: <LayersIcon className="w-4 h-4 text-white" />,
           },
           {
             title: "Third Inner Menu #2",
@@ -112,6 +114,7 @@ const mainMenuItems: MenuItem[] = [
             title: "2First Inner Menu",
             content: "2First Inner Menu Content",
             href: "#2first-inner-menu",
+            icon: <LayersIcon className="w-4 h-4 text-green-500" />,
           },
           {
             title: "2Second Inner Menu",
