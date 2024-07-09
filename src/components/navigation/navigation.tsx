@@ -268,7 +268,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         >
           <AccordionDemo mainMenuItems={mainMenuItems} />
         </div>
-        <div className="flex flex-col w-full items-start gap-3.5 p-4 border-t border-white/10">
+        <div className="sm:hidden flex-col w-full items-start gap-3.5 p-4 border-t border-white/10">
           <Button
             variant="primary"
             size="small"
