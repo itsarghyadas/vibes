@@ -497,7 +497,7 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
         </AccordionItem>
       ))}
       <a
-        className="flex text-white items-start justify-start flex-1 cursor-pointer p-2 py-3 h-11 text-base leading-none outline-none"
+        className="flex text-white items-start justify-start flex-1 cursor-pointer p-2 py-3 h-11 text-base outline-none"
         href="#"
       >
         Log In
