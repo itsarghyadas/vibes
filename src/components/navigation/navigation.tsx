@@ -94,12 +94,12 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
   return (
     <>
       <NavigationMenu.Root
-        className={`bg-[#394150]/50 border border-white/20 max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap  ${
+        className={`bg-[#394150]/50 border border-white/20 max-h-[calc(100%-2.5rem)] max-w-6xl mx-auto rounded-3xl lg:rounded-full flex items-center justify-between flex-wrap ${
           fixed || isScrollingUp
-            ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-5 transition-transform duration-200 ease-out"
+            ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] [transform:translate3d(0px,1.5rem,0px)] transition-transform duration-200 ease-out"
             : prevScrollPos < 1
             ? "relative"
-            : "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] translate-y-[-100%] transition-transform duration-200 ease-out"
+            : "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2rem)] [transform:translate3d(0px,-100%,0px)] transition-transform duration-200 ease-out"
         }`}
       >
         <div className="flex items-center justify-between w-full p-2">
@@ -246,7 +246,7 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
 
         <div
           className={`w-full lg:hidden overflow-hidden flex flex-col transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? "max-h-[90svh]" : "max-h-0"
+            isMobileMenuOpen ? "max-h-[calc(100svh-6rem)]" : "max-h-0"
           }`}
         >
           <div
@@ -357,9 +357,7 @@ const ListItem = ({
         onClick={onClick}
         className="listitemcontainer flex items-start gap-x-2 p-3 py-2.5 relative"
       >
-        {isInnerMenuItem && (
-          <div className="w-4 h-4 mt-0.5 bg-white/50 rounded-full">{icon}</div>
-        )}
+        {isInnerMenuItem && <div className="w-4 h-4 mt-0.5">{icon}</div>}
         <div className="flex flex-col gap-y-0.5">
           <h3 className="text-sm text-white">{title}</h3>
           <p className="text-xs text-white/50 font-normal">{content}</p>
@@ -463,9 +461,7 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
                         key={innerIndex}
                         className="flex items-start gap-x-2 px-3 py-2.5"
                       >
-                        <div className="w-4 h-4 mt-0.5 bg-white/50 rounded-full">
-                          {innerItem.icon}
-                        </div>
+                        <div className="w-4 h-4 mt-0.5">{innerItem.icon}</div>
                         <div className="flex flex-col gap-y-0.5">
                           <a
                             className="text-sm text-white"

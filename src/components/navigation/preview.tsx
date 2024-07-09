@@ -251,7 +251,7 @@ const mainMenuItems: MenuItem[] = [
 
 export default function NavigationPreview() {
   return (
-    <section className="w-full bg-[#07090D] h-screen p-5 relative">
+    <section className="w-full bg-[#07090D] p-5 h-[200vh]">
       <Navigation mainMenuItems={mainMenuItems} fixed={false} />
     </section>
   );
