@@ -53,8 +53,6 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
 
-  console.log(prevScrollPos);
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -271,12 +269,6 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
           <AccordionDemo mainMenuItems={mainMenuItems} />
         </div>
         <div className="flex flex-col w-full items-start gap-3.5 p-4 border-t border-white/10">
-          <a
-            className="flex text-white underline underline-offset-4 items-center justify-center flex-1 cursor-pointer py-2 text-base leading-none outline-none"
-            href="#"
-          >
-            Log In
-          </a>
           <Button
             variant="primary"
             size="small"
@@ -375,7 +367,9 @@ const ListItem = ({
         onClick={onClick}
         className="listitemcontainer flex items-start gap-x-2 p-3 py-2.5 relative"
       >
-        {isInnerMenuItem && <div className="w-4 h-4 mt-0.5">{icon}</div>}
+        {isInnerMenuItem && icon && (
+          <div className="w-4 h-4 mt-0.5">{icon}</div>
+        )}
         <div className="flex flex-col gap-y-0.5">
           <h3 className="text-sm text-white">{title}</h3>
           <p className="text-xs text-white/50 font-normal">{content}</p>
@@ -479,7 +473,9 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
                         key={innerIndex}
                         className="flex items-start gap-x-2 px-3 py-2.5"
                       >
-                        <div className="w-4 h-4 mt-0.5">{innerItem.icon}</div>
+                        {innerItem.icon && (
+                          <div className="w-4 h-4 mt-0.5">{innerItem.icon}</div>
+                        )}
                         <div className="flex flex-col gap-y-0.5">
                           <a
                             className="text-sm text-white"
@@ -500,6 +496,12 @@ const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
           </AccordionContent>
         </AccordionItem>
       ))}
+      <a
+        className="flex text-white items-start justify-start flex-1 cursor-pointer p-2 py-3 h-11 text-base leading-none outline-none"
+        href="#"
+      >
+        Log In
+      </a>
     </>
   </Accordion.Root>
 );
