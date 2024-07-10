@@ -162,7 +162,13 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
                         menuItem.subMenuItems[0].title ? "" : "hidden"
                       } h-full bg-[#13171E] backdrop-blur-xl z-10 rounded-l-2xl`}
                     >
-                      <ul className="w-full list grid gap-2 list-none p-2 m-0">
+                      <ul
+                        className={clsx(
+                          "group list w-full grid gap-2 list-none p-2 m-0",
+                          "data-[enhanced=true]:hover:after:opacity-[1] data-[enhanced=true]:hover:after:[transition:opacity_0.2s_0.2s,inset_0.2s] data-[enhanced=true]:after:opacity-[var(--opacity,0)] data-[enhanced=true]:after:[transition:opacity_0.025s,inset_0.025s_0.025s]",
+                          "after:content-[''] after:rounded-[0.5rem] after:absolute after:bg-[#39415050] after:pointer-events-none after:z-[1] after:top-[var(--top)] after:left-[var(--left)] after:right-[var(--right)] after:bottom-[var(--bottom)] after:[transition:inset_0.2s] after:h-[var(--height)] after:w-[var(--width)]"
+                        )}
+                      >
                         {menuItem.subMenuItems.map((subMenuItem, subIndex) => (
                           <ListItem
                             key={subIndex}
@@ -176,11 +182,15 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
                       </ul>
                     </div>
                     <ul
-                      className={`list grid ${
-                        innerItems.length < 4
-                          ? "grid-cols-1"
-                          : "grid-cols-1 xl:grid-cols-2"
-                      } gap-2 items-start justify-between w-full h-full list-none p-2 m-0 min-w-[400px] xl:min-w-[500px]`}
+                      className={clsx(
+                        `group list grid ${
+                          innerItems.length < 4
+                            ? "grid-cols-1"
+                            : "grid-cols-1 xl:grid-cols-2"
+                        } gap-2 items-start justify-between w-full h-full list-none p-2 m-0 min-w-[400px] xl:min-w-[500px]`,
+                        "data-[enhanced=true]:hover:after:opacity-[1] data-[enhanced=true]:hover:after:[transition:opacity_0.2s_0.2s,inset_0.2s] data-[enhanced=true]:after:opacity-[var(--opacity,0)] data-[enhanced=true]:after:[transition:opacity_0.025s,inset_0.025s_0.025s]",
+                        "after:content-[''] after:rounded-[0.5rem] after:absolute after:bg-[#39415050] after:pointer-events-none after:z-[1] after:top-[var(--top)] after:left-[var(--left)] after:right-[var(--right)] after:bottom-[var(--bottom)] after:[transition:inset_0.2s] after:h-[var(--height)] after:w-[var(--width)]"
+                      )}
                     >
                       {innerItems.map((item, innerIndex) => (
                         <ListItem
@@ -262,11 +272,11 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
         }`}
       >
         <div
-          className={`max-h-[calc(100svh-1.25rem)] menucontainer overflow-y-scroll ${
+          className={`max-h-[calc(100svh-1.25rem)] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-y-scroll ${
             isMobileMenuOpen ? "border-t border-white/10" : "border-none"
           }`}
         >
-          <AccordionDemo mainMenuItems={mainMenuItems} />
+          <MobileMenu mainMenuItems={mainMenuItems} />
         </div>
         <div className="sm:hidden flex-col w-full items-start gap-3.5 p-4 border-t border-white/10">
           <Button
@@ -357,7 +367,7 @@ const ListItem = ({
 
   return (
     <li
-      className={`listitem list-none cursor-pointer rounded-lg h-full z-10 transition-all duration-150 relative ${
+      className={`listitem hover:[--li-active:1] list-none cursor-pointer rounded-lg h-full z-10 transition-all duration-150 relative ${
         isActive ? "bg-[#394150]/50 " : ""
       }`}
       key={title}
@@ -365,7 +375,10 @@ const ListItem = ({
       <a
         href={href}
         onClick={onClick}
-        className="listitemcontainer flex items-start gap-x-2 p-3 py-2.5 relative"
+        className={clsx(
+          "listitemcontainer flex items-start gap-x-2 p-3 py-2.5 relative",
+          "group-[&:not([data-enhanced])]:after:content-[''] group-[&:not([data-enhanced])]:after:absolute group-[&:not([data-enhanced])]:after:inset-0 group-[&:not([data-enhanced])]:after:-z-[2] group-[&:not([data-enhanced])]:after:bg-[hsl(0_0%_10%)]  group-[&:not([data-enhanced])]:after:rounded-2xl group-[&:not([data-enhanced])]:after:opacity-[var(--li-active,0)] group-[&:not([data-enhanced])]:after:transition-opacity group-[&:not([data-enhanced])]:after:duration-200"
+        )}
       >
         {isInnerMenuItem && icon && (
           <div className="w-4 h-4 mt-0.5">{icon}</div>
@@ -443,7 +456,7 @@ const AccordionContent = forwardRef<
   </Accordion.Content>
 ));
 
-const AccordionDemo = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
+const MobileMenu = ({ mainMenuItems }: { mainMenuItems: MenuItem[] }) => (
   <Accordion.Root
     className="w-full p-2"
     type="single"

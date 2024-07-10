@@ -1,4 +1,4 @@
-.list::after {
+/* .list::after {
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.02);
   content: "";
@@ -13,22 +13,22 @@
   transition: inset 0.2s;
   height: var(--height);
   width: var(--width);
-}
+} */
 
-.list[data-enhanced]:hover {
+/* .list[data-enhanced]:hover {
   --active: 1;
-}
+} */
 
-.list[data-enhanced]::after {
+/* .list[data-enhanced]::after {
   opacity: var(--active, 0);
   transition: opacity 0.025s, inset 0.025s 0.025s;
-}
+} */
 
-.list[data-enhanced]:hover::after {
+/* .list[data-enhanced]:hover::after {
   transition: opacity 0.2s 0.2s, inset 0.2s;
-}
+} */
 
-.list:not([data-enhanced]) .listitemcontainer::after {
+/* .list:not([data-enhanced]) .listitemcontainer::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -38,12 +38,12 @@
   opacity: var(--li-active, 0);
   transition: opacity 0.2s;
 }
-
-.listitem:hover {
+ */
+/* .listitem:hover {
   --li-active: 1;
-}
+} */
 
-@keyframes animateText {
+/* @keyframes animateText {
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -57,13 +57,13 @@
 .animate-text {
   animation: animateText 0.5s ease-out forwards;
   transition: all 0.3s ease-in-out;
-}
+} */
 
-.menucontainer::-webkit-scrollbar {
+/* .menucontainer::-webkit-scrollbar {
   display: none;
 }
 
 .menucontainer {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
+} */
