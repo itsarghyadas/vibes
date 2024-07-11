@@ -1,15 +1,8 @@
-/* hambuger menu two line
-cta button different container in the mobiel
-padding overflow
-
-icon container only color and border */
-
 import { useEffect, useState, forwardRef } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Accordion from "@radix-ui/react-accordion";
 import { CaretDownIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import Button from "../vibesbutton/vibesbutton";
-import "./navanimate.css";
 import clsx from "clsx";
 
 type InnerMenuItem = {
@@ -91,25 +84,15 @@ const Navigation = ({ mainMenuItems, fixed }: NavigationProps) => {
     }
   };
 
-  const baseClasses =
-    "bg-[#394150]/50 border border-white/20 max-h-[calc(100%-2.5rem)] max-w-6xl mx-auto rounded-[26px] lg:rounded-full flex items-center justify-between flex-wrap";
-  const fixedClasses =
-    "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2.5rem)] transition-transform duration-200 ease-out";
-  const transformUpClasses = "[transform:translate3d(0px,1.25rem,0px)]";
-  const transformDownClasses = "[transform:translate3d(0px,-100%,0px)]";
-
   return (
     <NavigationMenu.Root
       className={clsx(
-        baseClasses,
+        "bg-[#394150]/50 border border-white/20 max-h-[calc(100%-2.5rem)] max-w-6xl mx-auto rounded-[26px] lg:rounded-full flex items-center justify-between flex-wrap",
         fixed || isScrollingUp
-          ? fixedClasses
+          ? "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2.5rem)] [transform:translate3d(0px,1.25rem,0px)] transition-transform duration-200 ease-out"
           : prevScrollPos < 10
           ? "relative"
-          : fixedClasses,
-        isScrollingUp
-          ? transformUpClasses
-          : !isScrollingUp && prevScrollPos >= 13 && transformDownClasses
+          : "fixed top-0 left-0 right-0 z-[1] w-[calc(100%-2.5rem)] [transform:translate3d(0px,-100%,0px)] transition-transform duration-200 ease-out"
       )}
     >
       <div className="flex items-center justify-between w-full p-2">
