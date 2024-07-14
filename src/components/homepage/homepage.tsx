@@ -6,6 +6,7 @@ const links = [
   { to: "/carousel", text: "Carousel" },
   { to: "/embla-carousel", text: "Embla Carousel" },
   { to: "/navmenu", text: "Nav Menu" },
+  { to: "/particle", text: "Particle" },
 ];
 
 export default function Homepage() {
