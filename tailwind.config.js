@@ -18,6 +18,11 @@ export default {
         ...indigo,
       },
       keyframes: {
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
         enterFromRight: {
           from: { opacity: "0", transform: "translateX(200px)" },
           to: { opacity: "1", transform: "translateX(0)" },
@@ -80,6 +85,7 @@ export default {
       rotate: "rotate 1500ms linear infinite",
       slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
       slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+      "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
     },
   },
   plugins: [

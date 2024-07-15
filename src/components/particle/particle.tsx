@@ -1,3 +1,4 @@
+import { BorderBeam } from "./border-beam";
 import "./particle.css";
 
 interface ParticlesProps {
@@ -18,7 +19,7 @@ const Particles: React.FC<ParticlesProps> = ({
   maxSize,
 }) => {
   return (
-    <div className="w-full h-full pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 [transform:translateZ(0)_translate(-50%,-50%);] [mask-image:radial-gradient(50%_50%_at_50%_50%,rgba(217,217,217,0)_27.08%,#d9d9d9_47.92%,rgba(217,217,217,.8)_75%,rgba(217,217,217,0)_100%)] [mask-position:0,0] [mask-size:cover] particlecontainer -z-[1]">
+    <div className="w-full h-full pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 [transform:translateZ(0)_translate(-50%,-50%);] [mask-image:radial-gradient(50%_50%_at_50%_50%,rgba(217,217,217,0)_27.08%,#d9d9d9_47.92%,rgba(217,217,217,.8)_75%,rgba(217,217,217,0)_100%)] [mask-position:0,0] [mask-size:cover] particlecontainer -z-[1]">
       {[...Array(amount)].map((_, index) => {
         const animationDuration =
           Math.random() * (maxSpeed - minSpeed) + minSpeed;
@@ -62,7 +63,7 @@ function ParticlePreview() {
     <div className=" min-h-screen w-full items-center justify-center flex bg-neutral-900">
       <div className="max-w-5xl mx-auto w-full flex flex-col gap-y-10 items-center justify-center px-7 xl:px-0">
         <div className="text-center flex flex-col gap-y-5 max-w-2xl mx-auto">
-          <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold">
+          <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold text-balance">
             The composable visual editor for elite marketing teams
           </h2>
           <p className="text-neutral-300 text-balance text-base lg:text-lg">
@@ -75,6 +76,7 @@ function ParticlePreview() {
           <div className="relative before:absolute before:inset-3 before:-z-20 before:rounded-md before:bg-[#EA3BA7]/50 before:blur-3xl lg:before:inset-4 lg:before:blur-3xl before:transition-opacity before:opacity-75 ">
             <div className="h-full w-full">
               <div className="group relative z-0 h-full w-full overflow-hidden rounded-[32px] p-[1px] ring-1 ring-[#F59DD3]/30 bg-gradient-to-b from-[#EA3BA7]/25 to-[#07090D]/50">
+                <BorderBeam size={250} duration={12} delay={9} />
                 <div className="bg-purple-900/10 p-2 w-full h-full">
                   <div className="overflow-hidden rounded-3xl h-full w-full">
                     <img

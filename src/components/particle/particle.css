@@ -24,7 +24,7 @@
   animation-name: float;
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-direction: normal;
   animation-duration: 2 s;
   --float-distance: 100px;
 }
