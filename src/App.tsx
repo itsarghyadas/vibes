@@ -5,7 +5,7 @@ import VestaboardShow from "./components/vestabaord/vestaboardshow";
 import Carousel from "./components/carousel/carousel";
 import EmblaCarouselShow from "./components/embla-carousel/Carousel";
 import NavMenuShow from "./components/navigation/preview";
-import ParticlePreview from "./components/particle/particle";
+import ParticleShowcase from "./components/particle/preview";
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
       <Route path="/carousel" element={<Carousel />} />
       <Route path="/embla-carousel" element={<EmblaCarouselShow />} />
       <Route path="/navmenu" element={<NavMenuShow />} />
-      <Route path="/particle" element={<ParticlePreview />} />
+      <Route path="/particle" element={<ParticleShowcase />} />
     </Routes>
   );
 }

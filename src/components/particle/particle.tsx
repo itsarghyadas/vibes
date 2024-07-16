@@ -58,9 +58,16 @@ const Particles: React.FC<ParticlesProps> = ({
   );
 };
 
-function ParticlePreview() {
+function ParticlePreview({
+  amount,
+  minSpeed,
+  maxSpeed,
+  color,
+  minSize,
+  maxSize,
+}: ParticlesProps) {
   return (
-    <div className=" min-h-screen w-full items-center justify-center flex bg-neutral-900">
+    <div className=" w-full items-center justify-center flex bg-neutral-900">
       <div className="max-w-5xl mx-auto w-full flex flex-col gap-y-10 items-center justify-center px-7 xl:px-0">
         <div className="text-center flex flex-col gap-y-5 max-w-2xl mx-auto">
           <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold text-balance">
@@ -90,12 +97,12 @@ function ParticlePreview() {
             </div>
           </div>
           <Particles
-            amount={500}
-            minSpeed={5}
-            maxSpeed={25}
-            color="#f19fd875"
-            minSize={1}
-            maxSize={3}
+            amount={amount}
+            minSpeed={minSpeed}
+            maxSpeed={maxSpeed}
+            color={color}
+            minSize={minSize}
+            maxSize={maxSize}
           />
         </div>
       </div>
