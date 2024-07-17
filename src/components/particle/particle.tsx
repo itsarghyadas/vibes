@@ -19,7 +19,7 @@ const Particles: React.FC<ParticlesProps> = ({
   maxSize,
 }) => {
   return (
-    <div className="w-full h-full pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 [transform:translateZ(0)_translate(-50%,-50%);] [mask-image:radial-gradient(50%_50%_at_50%_50%,rgba(217,217,217,0)_27.08%,#d9d9d9_47.92%,rgba(217,217,217,.8)_75%,rgba(217,217,217,0)_100%)] [mask-position:0,0] [mask-size:cover] particlecontainer -z-[1]">
+    <div className="w-full h-full pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 [transform:translateZ(0)_translate(-50%,-50%);] [mask-image:radial-gradient(50%_50%_at_50%_50%,#d9d9d9_47.92%,rgba(217,217,217,.8)_75%,rgba(217,217,217,0)_100%)] [mask-position:0,0] [mask-size:cover] particlecontainer -z-10">
       {[...Array(amount)].map((_, index) => {
         const animationDuration =
           Math.random() * (maxSpeed - minSpeed) + minSpeed;
@@ -38,7 +38,7 @@ const Particles: React.FC<ParticlesProps> = ({
         return (
           <div
             key={index}
-            className="bg-white rounded-[5px] h-0.5 w-0.5 absolute [transform:translateZ(0)_translate(-50%,-50%);] animate-float"
+            className="bg-white rounded-[5px] h-0.5 w-0.5 absolute [transform:translateZ(0)_translate(-50%,-50%);] animate-float -z-10"
             style={
               {
                 left: `${left}%`,
@@ -69,7 +69,7 @@ function ParticlePreview({
   return (
     <div className=" w-full items-center justify-center flex bg-neutral-900">
       <div className="max-w-5xl mx-auto w-full flex flex-col gap-y-10 items-center justify-center px-7 xl:px-0">
-        <div className="text-center flex flex-col gap-y-5 max-w-2xl mx-auto">
+        <div className="text-center flex flex-col gap-y-5 max-w-2xl mx-auto z-10">
           <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold text-balance">
             The composable visual editor for elite marketing teams
           </h2>
