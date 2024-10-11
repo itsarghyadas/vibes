@@ -41,6 +41,7 @@ export default function SplitFlapShow({
   const [verticalAlign, setVerticalAlign] = useState(initialVerticalAlign);
   const [, setWordPositions] = useState<WordPosition[]>(initialWordPositions);
   const [resetKey, setResetKey] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const words = endStr.split(" ");
@@ -68,106 +69,118 @@ export default function SplitFlapShow({
   };
 
   return (
-    <div className="splitflip-body flex flex-col items-center justify-center min-h-screen h-full space-y-4 pb-20">
-      <div className="gap-y-2 my-10 max-w-4xl mx-auto flex flex-wrap items-center gap-x-10 border rounded-lg border-neutral-500 p-5 font-space">
-        <div className="flex flex-col gap-y-1">
-          <label className="text-neutral-500/50">Begin String</label>
-          <input
-            type="text"
-            value={beginStr}
-            onChange={(e) => setBeginStr(e.target.value)}
-            placeholder="Begin String"
-            className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
-          />
+    <div className="splitflip-body flex flex-col items-center justify-center min-h-screen h-full space-y-4 pb-20 relative">
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="fixed bottom-4 right-4 bg-orange-500 text-sm font-bold text-white py-2 px-4 rounded z-10"
+      >
+        {isMenuOpen ? "Close Options" : "Open Options"}
+      </button>
+
+      {isMenuOpen && (
+        <div className="fixed bottom-16 right-4 bg-neutral-800 border border-neutral-500 rounded-lg p-5 shadow-lg z-10 max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="gap-y-2 flex flex-col items-start gap-x-10 font-semibold">
+            <div className="flex flex-col gap-y-1 w-full">
+              <label className="text-neutral-500 text-sm">Begin String</label>
+              <input
+                type="text"
+                value={beginStr}
+                onChange={(e) => setBeginStr(e.target.value)}
+                placeholder="Begin String"
+                className="rounded text-sm placeholder:text-xs bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none w-full"
+              />
+            </div>
+            <div className="flex flex-col gap-y-1 w-full">
+              <label className="text-neutral-500 text-sm">End String</label>
+              <input
+                type="text"
+                value={endStr}
+                onChange={(e) => setEndStr(e.target.value)}
+                placeholder="End String"
+                className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none w-full"
+              />
+            </div>
+            <div className="flex flex-col gap-y-1 w-full">
+              <label className="text-neutral-500 text-sm">Rows</label>
+              <input
+                type="number"
+                value={rows}
+                onChange={(e) => setRows(Number(e.target.value))}
+                placeholder="Rows"
+                className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none w-full"
+              />
+            </div>
+            <div className="flex flex-col gap-y-1 w-full">
+              <label className="text-neutral-500 text-sm">Columns</label>
+              <input
+                type="number"
+                value={columns}
+                onChange={(e) => setColumns(Number(e.target.value))}
+                placeholder="Columns"
+                className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none w-full"
+              />
+            </div>
+            <div className="flex flex-col gap-y-1 w-full">
+              <label className="text-neutral-500 text-sm">Speed</label>
+              <input
+                type="number"
+                value={speed}
+                step="0.01"
+                onChange={(e) => setSpeed(Number(e.target.value))}
+                placeholder="Speed"
+                className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none w-full"
+              />
+            </div>
+            <div className="flex flex-col gap-y-1 w-full">
+              <label className="text-neutral-500 text-sm">Align</label>
+              <select
+                value={align}
+                onChange={(e) =>
+                  setAlign(e.target.value as "left" | "center" | "right")
+                }
+                className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none w-full"
+              >
+                <option value="left">Left</option>
+                <option value="center">Center</option>
+                <option value="right">Right</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-y-1 w-full">
+              <label className="text-neutral-500 text-sm">Vertical Align</label>
+              <select
+                value={verticalAlign}
+                onChange={(e) =>
+                  setVerticalAlign(
+                    e.target.value as "top" | "middle" | "bottom"
+                  )
+                }
+                className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none w-full"
+              >
+                <option value="top">Top</option>
+                <option value="middle">Middle</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+            <button
+              onClick={resetAnimation}
+              className="mt-4 bg-orange-500 text-white py-2 px-4 rounded w-full"
+            >
+              Reset Animation
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-y-1">
-          <label className="text-neutral-500/50">End String</label>
-          <input
-            type="text"
-            value={endStr}
-            onChange={(e) => setEndStr(e.target.value)}
-            placeholder="End String"
-            className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
-          />
-        </div>
-        <div className="flex flex-col gap-y-1">
-          <label className="text-neutral-500/50">Rows</label>
-          <input
-            type="number"
-            value={rows}
-            onChange={(e) => setRows(Number(e.target.value))}
-            placeholder="Rows"
-            className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
-          />
-        </div>
-        <div className="flex flex-col gap-y-1">
-          <label className="text-neutral-500/50">Columns</label>
-          <input
-            type="number"
-            value={columns}
-            onChange={(e) => setColumns(Number(e.target.value))}
-            placeholder="Columns"
-            className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
-          />
-        </div>
-        <div className="flex flex-col gap-y-1">
-          <label className="text-neutral-500/50">Speed</label>
-          <input
-            type="number"
-            value={speed}
-            step="0.01"
-            onChange={(e) => setSpeed(Number(e.target.value))}
-            placeholder="Speed"
-            className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
-          />
-        </div>
-        <div className="flex flex-col gap-y-1">
-          <label className="text-neutral-500/50">Align</label>
-          <select
-            value={align}
-            onChange={(e) =>
-              setAlign(e.target.value as "left" | "center" | "right")
-            }
-            className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
-          >
-            <option value="left">Left</option>
-            <option value="center">Center</option>
-            <option value="right">Right</option>
-          </select>
-        </div>
-        <div className="flex flex-col gap-y-1">
-          <label className="text-neutral-500/50">Vertical Align</label>
-          <select
-            value={verticalAlign}
-            onChange={(e) =>
-              setVerticalAlign(e.target.value as "top" | "middle" | "bottom")
-            }
-            className="rounded text-sm bg-neutral-800 h-10 p-2 text-white ring-2 ring-neutral-500/50 placeholder:text-neutral-500/50 focus-visible:ring-orange-500 focus-visible:ring-offset-0 focus-visible:outline-none"
-          >
-            <option value="top">Top</option>
-            <option value="middle">Middle</option>
-            <option value="bottom">Bottom</option>
-          </select>
-        </div>
-        <button
-          onClick={resetAnimation}
-          className="mt-4 bg-orange-500 text-white py-2 px-4 rounded"
-        >
-          Reset Animation
-        </button>
-      </div>
-      <div className="">
-        <SplitFlipAnimation
-          key={resetKey}
-          beginStr={beginStr}
-          endStr={endStr}
-          rows={rows}
-          columns={columns}
-          align={align}
-          verticalAlign={verticalAlign}
-          speed={speed}
-        />
-      </div>
+      )}
+
+      <SplitFlipAnimation
+        key={resetKey}
+        beginStr={beginStr}
+        endStr={endStr}
+        rows={rows}
+        columns={columns}
+        align={align}
+        verticalAlign={verticalAlign}
+        speed={speed}
+      />
     </div>
   );
 }
