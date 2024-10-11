@@ -30,7 +30,7 @@ export default function Homepage() {
   return (
     <div className="bg-neutral-800 py-10 px-5 font-spline min-h-screen flex flex-col gap-y-10 items-center justify-center w-full">
       <div className="text-white">
-        <h1 className="text-4xl font-bold text-white">
+        <h1 className="text-xl md:text-2xl text-center lg:text-4xl font-bold text-white">
           All vibes will be listed here
         </h1>
       </div>
